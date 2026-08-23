@@ -1104,7 +1104,7 @@ body.page-dark-header .site-header .nav-toggle span { background: var(--white); 
 .impact-page-hero .ph-block {
     min-height: 60vh;
     background-image:
-        url('../images/impact-hero.png'),
+        
         linear-gradient(160deg, var(--green-darker) 0%, var(--green-dark) 55%, var(--green) 100%);
 }
 
@@ -1249,7 +1249,7 @@ body.page-dark-header .site-header .nav-toggle span { background: var(--white); 
 .md-info-photo .ph-block {
     height: 100%;
     background-image:
-        url('../images/marathon-runner.jpg'),
+        
         linear-gradient(160deg, var(--blue) 0%, var(--blue-dark) 100%);
 }
 
@@ -1271,7 +1271,7 @@ body.page-dark-header .site-header .nav-toggle span { background: var(--white); 
 }
 .md-races-icon.ph-block {
     background-color: transparent;
-    background-image: url('../images/marathon-runners.png');
+    
     background-size: contain;
     background-position: center;  /* NEW */
     background-repeat: no-repeat;
@@ -1341,15 +1341,10 @@ body.page-dark-header .site-header .nav-toggle span { background: var(--white); 
 .md-two-col .ph-block {
     border-radius: 14px;
     min-height: 300px;
-    background-image:
-        url('../images/marathon-bus.jpg'),
+   
         
 }
-.md-tree-donation .ph-block {
-    background-image:
-        url('../images/marathon-seedlings.jpg'),
-        
-}
+
 
 /* --- CTA band --- */
 .md-cta-band {
@@ -1394,7 +1389,7 @@ body.page-dark-header .site-header .nav-toggle span { background: var(--white); 
 .gd-hero .ph-block {
     min-height: 68vh;
     background-image:
-        url('../images/green-drive-hero.png'),
+        
         linear-gradient(120deg, var(--green-darker) 0%, var(--green) 100%);
 }
 
@@ -1450,7 +1445,7 @@ body.page-dark-header .site-header .nav-toggle span { background: var(--white); 
 .gd-photo-section .ph-block {
     min-height: 100vh;
     background-image:
-        url('../images/green-drive-planting.jpg'),
+        
         linear-gradient(120deg, var(--green-light), var(--green));
 }
 
