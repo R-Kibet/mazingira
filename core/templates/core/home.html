@@ -1,0 +1,84 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block content %}
+
+<!-- HERO -->
+<section class="hero" id="home" style="background-image:url('{% static 'core/images/hero.png' %}');">
+    <div class="hero-overlay"></div>
+    <div class="container hero-inner">
+        <img src="{% static 'core/images/badge-save-green-blue.png' %}" alt="Save Green, Save Blue" class="hero-badge-img">
+        <h1 class="hero-heading">
+            Conserving Water,<br>
+            Growing Forests,<br>
+            Empowering Communities
+        </h1>
+    </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+    <div class="container1 about-grid">
+        <div class="about-photo-card" style="background-image:url('{% static 'core/images/h1.png' %}');">
+           
+        </div>
+
+        <div class="about-content">
+            <h2 class="section-heading1 ">About Mazingira<br>Sustainability Village</h2>
+            <p class="about-text">
+                Mazingira Sustainability Village (MSV) is a registered community-led
+                sustainability organization dedicated to advancing environmental
+                conservation, climate action, green innovation, circular economy solutions,
+                and community resilience. Our work is aligned with Kenya's Vision 2030,
+                the National Climate Change Action Plan, the 15 Billion Trees Programme,
+                and the Sustainable Development Goals (SDGs).
+            </p>
+
+            <div class="focus-grid">
+                {% for area in focus_areas %}
+                <div class="focus-card">
+                    <span class="focus-icon">
+                        <img src="{% static area.icon %}" alt="">
+                    </span>
+                    <span class="focus-title">{{ area.title }}</span>
+                </div>
+                {% endfor %}
+            </div>
+
+            <a href="#programmes" class="arrow-link" id="programmes">
+                Our Programmes
+                <span class="arrow-circle">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- CORE VALUES -->
+<section class="values">
+    <div class="container1">
+        <h2 class="section-heading1 ">Our Core Values</h2>
+        <div class="values-grid">
+            {% for value in core_values %}
+            <div class="value-card">
+                <h3>{{ value.title }}</h3>
+                <p>{{ value.description }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

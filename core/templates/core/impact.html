@@ -1,0 +1,46 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block title %}Our Impact — Mazingira Sustainability Village (MSV){% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'core/css/impact.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<!-- IMPACT HERO — full image, no crop, scales proportionally at every width -->
+<section class="impact-banner" id="impact-hero">
+    <img src="{% static 'core/images/imp.png' %}" alt="Green Drive Initiative — Our Impact overview" class="impact-banner-img">
+</section>
+
+<!-- EXPECTED IMPACT HEADING -->
+<section class="impact-summary">
+    <div class="container">
+        <p class="impact-summary-eyebrow">
+            EXPECTED<br>
+            IMPACT BY <span class="impact-summary-year">2032</span>
+        </p>
+    </div>
+</section>
+
+<!-- IMPACT TABLE -->
+<section class="impact-table" id="impact-breakdown">
+    {% for item in impact_details %}
+    <div class="impact-row">
+        <div class="impact-row-inner container">
+            <div class="impact-icon">
+                {% if item.icon %}
+                <img src="{% static item.icon %}" alt="">
+                {% else %}
+                <span class="impact-icon-placeholder" aria-hidden="true"></span>
+                {% endif %}
+            </div>
+            <p class="impact-row-title">{{ item.title|upper }}</p>
+            <p class="impact-row-desc">{{ item.description }}</p>
+        </div>
+    </div>
+    {% endfor %}
+</section>
+
+{% endblock %}

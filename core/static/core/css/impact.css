@@ -1,0 +1,135 @@
+/* ============================================
+   IMPACT PAGE — page-specific styles
+   ============================================ */
+
+/* ============ HERO BANNER (full image, no crop) ============ */
+
+.impact-banner {
+    width: 100%;
+    line-height: 0; /* removes the small gap under inline images */
+    background: var(--green-darker); /* shows briefly while the image loads */
+}
+.impact-banner-img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+
+
+/* ============ EXPECTED IMPACT HEADING ============ */
+
+.impact-summary {
+    padding: 64px 0 44px;
+    background: var(--white);
+    text-align: center;
+}
+
+.impact-summary-eyebrow {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 30px;
+    color: var(--green);
+    letter-spacing: 0.02em;
+    line-height: 1.25;
+    margin: 0;
+}
+
+.impact-summary-year {
+    display: inline-block;
+    font-weight: 900;
+    font-size: 64px;
+    color: var(--green-dark);
+    line-height: 1;
+    margin-left: 6px;
+}
+
+/* ============ IMPACT TABLE ============ */
+
+.impact-table {
+    margin:auto 60px 20px 60px ;
+    display: flex;
+    flex-direction: column;
+    border-radius: 14px;
+}
+
+.impact-row:nth-child(odd) { background: var(--green-darker); }
+.impact-row:nth-child(even) { background: var(--green-mid); }
+
+.impact-row-inner {
+    display: grid;
+    grid-template-columns: 90px 260px 1fr;
+    align-items: center;
+    column-gap: 28px;
+    padding: 28px 24px;
+}
+
+.impact-icon {
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+.impact-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* Placeholder shown until a real icon path is set per row in views.py */
+.impact-icon-placeholder {
+    display: block;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: 2px dashed rgba(255, 255, 255, 0.45);
+}
+
+.impact-row-title {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 18px;
+    letter-spacing: 0.02em;
+    color: var(--yellow);
+    margin: 0;
+}
+
+.impact-row-desc {
+    font-size: 15px;
+    line-height: 1.75;
+    color: rgba(255, 255, 255, 0.85);
+    margin: 0;
+}
+
+/* ============ RESPONSIVE — TABLET (≤ 1024px) ============ */
+
+@media (max-width: 1024px) {
+    .impact-row-inner {
+        grid-template-columns: 70px 200px 1fr;
+        column-gap: 20px;
+        padding: 24px 20px;
+    }
+    .impact-summary-year { font-size: 52px; }
+}
+
+/* ============ RESPONSIVE — MOBILE (≤ 720px) ============ */
+
+@media (max-width: 720px) {
+    .impact-summary { padding: 44px 0 28px; }
+    .impact-summary-eyebrow { font-size: 18px; }
+    .impact-summary-year { font-size: 40px; margin-left: 0; }
+
+    .impact-row-inner {
+        grid-template-columns: 1fr;
+        justify-items: center;
+        text-align: center;
+        row-gap: 10px;
+        padding: 28px 20px;
+    }
+    .impact-icon { width: 48px; height: 48px; }
+    .impact-icon-placeholder { width: 44px; height: 44px; }
+    .impact-row-title { font-size: 16px; }
+    .impact-row-desc { font-size: 13.5px; }
+}

@@ -1,0 +1,184 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block title %}Ndakaini Mazingira Half Marathon | Mazingira Sustainability Village{% endblock %}
+{% block body_class %}page-dark-header{% endblock %}
+
+{% block content %}
+
+<!-- HERO: the Marathon banner (same section used on the homepage) -->
+<section class="marathon">
+    <div class="marathon-photo" style="background-image:url('{% static 'core/images/marathon.png' %}');"></div>
+    <div class="marathon-content">
+        <div class="marathon-inner">
+            <div class="marathon-logo">
+                <img src="{% static 'core/images/logo.png' %}" alt="Mazingira Sustainability Village" class="marathon-logo-icon">
+            </div>
+
+            <p class="marathon-eyebrow">NAIROBI WATER</p>
+            <h2 class="marathon-heading">
+                <span class="line-white">NDAKAINI</span>
+                <span class="line-green">MAZINGIRA</span>
+            </h2>
+            <p class="marathon-sub">HALF MARATHON</p>
+
+            <a href="{% static 'core/images/hero1.png' %}" class="badge-pill-link">
+                <img src="{% static 'core/images/hero1.png' %}" alt="Save Green, Save Blue" class="badge-pill-img">
+            </a>
+
+            <div class="marathon-cta-row">
+                <a href="#register" class="btn btn-register">REGISTER NOW</a>
+                <div class="countdown" id="marathon-countdown" aria-label="Time remaining until the marathon">
+                    <div class="countdown-unit">
+                        <span class="countdown-value" data-unit="days">00</span>
+                        <span class="countdown-label">Days</span>
+                    </div>
+                    <div class="countdown-unit">
+                        <span class="countdown-value" data-unit="hours">00</span>
+                        <span class="countdown-label">Hrs</span>
+                    </div>
+                    <div class="countdown-unit">
+                        <span class="countdown-value" data-unit="minutes">00</span>
+                        <span class="countdown-label">Min</span>
+                    </div>
+                    <div class="countdown-unit">
+                        <span class="countdown-value" data-unit="seconds">00</span>
+                        <span class="countdown-label">Sec</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ABOUT NDAKAINI MARATHON -->
+<section class="marathon-detail" id="about-marathon">
+    <div class="container">
+        <h2 class="md-heading">About Ndakaini Marathon</h2>
+        <p class="md-text">
+            The Nairobi Water Ndakaini Mazingira Half Marathon is our flagship
+            sustainability-conscious road race, held under the theme
+            <strong>"Save Green &amp; Save Blue."</strong> The event takes place
+            within the Ndakaini Dam, one of the country's most important
+            freshwater reservoirs, serving millions of residents in Nairobi,
+            Murang'a, Machakos, Kajiado &amp; Kiambu and environs.
+        </p>
+
+        <div class="md-info-card">
+            <div class="md-info-list">
+                {% for item in info_items %}
+                <div class="md-info-item">
+                    <span class="md-info-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 2"/></svg>
+                    </span>
+                    <div>
+                        <p class="md-info-label">{{ item.label }}</p>
+                        <p class="md-info-value">{{ item.value }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="md-info-photo">
+                <div class="ph-block" style="background-image:url('{% static 'core/images/' %}'), linear-gradient(160deg, var(--blue) 0%, var(--blue-dark) 100%);">
+                    <span class="ph-tag">Placeholder — runner photo</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- RACES AND FEES -->
+<section class="marathon-detail" id="races-fees">
+    <div class="container2">
+        <h2 class="md-heading">Races and Fees</h2>
+        <div class="md-races-grid">
+            <div class="md-races-icon ph-block" style="background-image:url('{% static 'core/images/m2.png' %}')">
+                
+            </div>
+            <div>
+                <p class="md-subheading">RACES</p>
+                <div class="md-race-rows">
+                    {% for race in races %}
+                    <div class="md-race-row" style="width: {{ race.width }}%; max-width: 100%;">
+                        <span>{{ race.name }}</span>
+                        <span class="fee">{{ race.fee }}</span>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- TRANSPORT -->
+<section class="marathon-detail" id="transport">
+    <div class="container2">
+        <h2 class="md-heading">Transport</h2>
+        <div class="md-two-col">
+            <div>
+                <div class="md-price-pill">
+                    <span>Nairobi – Ndakaini</span>
+                    <span class="fee">{{ transport_price }}</span>
+                </div>
+                <p class="md-schedule-label">BUS SCHEDULE</p>
+                <div class="md-schedule-rows">
+                    {% for row in transport_schedule %}
+                    <div class="md-schedule-row"><span>{{ row.stop }}</span><span>{{ row.time }}</span></div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="ph-block" style="background-image:url('{% static 'core/images/b1.png' %}')">
+                
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- TREE DONATION -->
+<section class="marathon-detail md-tree-donation" id="tree-donation">
+    <div class="container2">
+        <h2 class="md-heading">Tree Donation</h2>
+        <div class="md-two-col">
+             <div class="ph-block" style="background-image:url('{% static 'core/images/tree.png' %}')">
+                
+            </div>
+            <div>
+                <div class="md-price-pill">
+                    <span>Nairobi – Ndakaini</span>
+                    <span class="fee">{{ tree_donation_price }}</span>
+                </div>
+                <p class="md-schedule-label">BUS SCHEDULE</p>
+                <div class="md-schedule-rows">
+                    {% for row in tree_donation_schedule %}
+                    <div class="md-schedule-row"><span>{{ row.stop }}</span><span>{{ row.time }}</span></div>
+                    {% endfor %}
+                </div>
+            </div>
+           
+        </div>
+
+        <div class="md-cta-band" id="register">
+            <div class="md-cta-lockup ph-block" style="background-image:url('{% static 'core/images/marathon-cta-lockup.png' %}');">
+                <span class="ph-tag">Placeholder — event logo lockup</span>
+            </div>
+            <p class="md-cta-sub">Secure your spot today. Limited slots available for all races.</p>
+            <a href="#register" class="btn btn-register">REGISTER NOW</a>
+        </div>
+    </div>
+</section>
+
+<!-- SPONSORS -->
+<section class="marathon-detail" id="sponsors">
+    <div class="container2">
+        <h2 class="md-heading">Our Sponsors &amp; Partners</h2>
+        <div class="md-sponsors-grid ph-block" style="background-image:url('{% static 'core/images/sp.png' %}');">
+        </div>
+
+        <div class="md-final-badge">
+            <img src="{% static 'core/images/hero1.png' %}" alt="Save Green, Save Blue" class="badge-pill-img">
+        </div>
+    </div>
+</section>
+
+{% endblock %}

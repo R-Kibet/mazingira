@@ -1,0 +1,225 @@
+from django.shortcuts import render
+
+
+def home(request):
+    """Landing page for Mazingira Sustainability Village (MSV)."""
+
+    focus_areas = [
+    {'icon': 'core/images/ab2.png', 'title': 'Water Security & Watershed Protection'},
+    {'icon': 'core/images/ab3.png', 'title': 'Tree Growing & Ecosystem Restoration'},
+    {'icon': 'core/images/ab5.png', 'title': 'Circular Economy & Green Innovation'},
+    {'icon': 'core/images/ab4.png', 'title': 'Sports for Sustainability Advocacy'},
+    ] 
+
+    core_values = [
+        {
+            'title': 'Collaboration',
+            'description': (
+                'Lasting impact is built through partnerships-bringing '
+                'together communities, corporates, government, and '
+                'institutions to solve shared challenges.'
+            ),
+        },
+        {
+            'title': 'Commitment',
+            'description': (
+                'Driven by consistency, accountability, and a long-term '
+                'dedication to sustainability and impact.'
+            ),
+        },
+        {
+            'title': 'Community',
+            'description': (
+                'Rooted in local ownership and grassroots participation, '
+                'empowering people as active stewards of their environment.'
+            ),
+        },
+        {
+            'title': 'Conservation',
+            'description': (
+                'Ecosystem protection, restoration, and responsible '
+                'resource management at the heart of everything we do.'
+            ),
+        },
+    ]
+
+    impact_milestones = [
+        {
+            'year': '2027',
+            'label': 'Target',
+            'headline': '1 Million Trees',
+            'description': (
+                'A rapid scale-up phase focused on establishing the '
+                "programme's infrastructure, partnerships, nursery "
+                'capacity, community networks, and initial restoration '
+                'sites.'
+            ),
+        },
+        {
+            'year': '2032',
+            'label': 'Target',
+            'headline': '50 Million Trees',
+            'description': (
+                'A long-term ecosystem restoration ambition that will '
+                'transform the Green Drive into a major landscape-scale '
+                'tree-growing and conservation programme across the '
+                'Aberdare Catchment and surrounding communities.'
+            ),
+        },
+    ]
+
+    gallery_photos = [
+        'core/images/g1.jpg',
+        'core/images/g2.jpg',
+        'core/images/g3.jpg',
+        'core/images/g4.jpg',
+        'core/images/g5.jpg',
+        'core/images/g6.jpg',
+    ]
+
+    context = {
+        'focus_areas': focus_areas,
+        'core_values': core_values,
+        'impact_milestones': impact_milestones,
+        'gallery_photos': gallery_photos,
+    }
+    return render(request, 'core/home.html', context)
+
+
+def impact(request):
+    """Impact page for Mazingira Sustainability Village (MSV)."""
+
+    # Each row of the "Expected Impact by 2032" table.
+    # 'icon' is left blank on purpose -- the template falls back to a
+    # placeholder circle whenever it's empty. Drop a static image path in
+    # here (e.g. 'core/images/impact-trees.png') per row once the icons are
+    # ready, or point every row at the same file to reuse one icon for all.
+    impact_details = [
+        {
+            'icon': '',
+            'title': '50 Million Trees',
+            'description': 'Planted and nurtured across the programme landscape.',
+        },
+        {
+            'icon': '',
+            'title': 'Water Security',
+            'description': (
+                'Improved protection of the Aberdare Catchment and water '
+                'sources feeding Ndakaini Dam and the wider Nairobi water '
+                'system.'
+            ),
+        },
+        {
+            'icon': '',
+            'title': 'Climate Action',
+            'description': 'Increased carbon sequestration and improved climate resilience.',
+        },
+        {
+            'icon': '',
+            'title': 'Forest Restoration',
+            'description': (
+                'Rehabilitation of degraded landscapes and increased '
+                'tree and forest cover.'
+            ),
+        },
+        {
+            'icon': '',
+            'title': 'Biodiversity',
+            'description': 'Improved habitats and ecosystem health.',
+        },
+        {
+            'icon': '',
+            'title': 'Community Livelihoods',
+            'description': (
+                'Commercial fruit trees and productive tree systems '
+                'creating food security, income, and green livelihood '
+                'opportunities.'
+            ),
+        },
+        {
+            'icon': '',
+            'title': 'Environmental Education',
+            'description': (
+                'Schools and young people engaged as the next generation '
+                'of environmental stewards.'
+            ),
+        },
+        {
+            'icon': '',
+            'title': 'Corporate ESG Impact',
+            'description': (
+                'A structured platform through which companies can '
+                'directly invest in measurable, place-based environmental '
+                'and social outcomes.'
+            ),
+        },
+    ]
+
+    context = {
+        'impact_details': impact_details,
+        # Update this path to whatever you named the hero background you
+        # already added to core/images/.
+        'hero_image': 'core/images/impact-hero.png',
+    }
+    return render(request, 'core/impact.html', context)
+
+def marathon(request):
+    """Nairobi Water Ndakaini Mazingira Half Marathon page."""
+
+    info_items = [
+        {'label': 'EVENT NAME', 'value': 'Ndakaini Mazingira Half Marathon'},
+        {'label': 'EVENT DATE', 'value': '10th October (Mazingira Day)'},
+        {'label': 'VENUE', 'value': 'Ndakaini Dam, Murang\u2019a'},
+        {'label': 'INTEGRATED CAUSE', 'value': 'Sustainability'},
+        {'label': 'EXPECTED TURN OUT', 'value': 'Over 10,000 participants'},
+    ]
+
+    races = [
+        {'name': '21KM Half Marathon', 'fee': 'KES 2,500/-', 'width': 100},
+        {'name': '10KM Corporate & Fun Run', 'fee': 'KES 2,500/-', 'width': 92},
+        {'name': '8KM Community Run', 'fee': 'KES 2,500/-', 'width': 84},
+        {'name': '5KM Pace', 'fee': 'KES 1000/-', 'width': 76},
+        {'name': '2KM Legends Race', 'fee': 'KES 500/-', 'width': 68},
+    ]
+
+    transport_schedule = [
+        {'stop': 'Kencom', 'time': '6:00 AM'},
+        {'stop': 'TRM', 'time': '6:30 AM'},
+        {'stop': 'Kenyatta University', 'time': '5:00 AM'},
+    ]
+
+    tree_donation_schedule = [
+        {'stop': 'Kencom', 'time': '4:00 AM'},
+        {'stop': 'TRM', 'time': '4:30 AM'},
+        {'stop': 'Kenyatta University', 'time': '5:00 AM'},
+    ]
+
+    sponsors = [
+        'Nairobi Water',
+        'Kenya Forest Service',
+        'KEPRO',
+        'Coca-Cola Foundation',
+        'Kakuzi',
+        'Kenya Jewel',
+        'Favicon Media',
+        'Spiro',
+        'Subaru Kenya',
+    ]
+
+    context = {
+        'info_items': info_items,
+        'races': races,
+        'transport_price': 'KES 1,500/-',
+        'transport_schedule': transport_schedule,
+        'tree_donation_price': 'KES 500/-',
+        'tree_donation_schedule': tree_donation_schedule,
+        'sponsors': sponsors,
+    }
+    return render(request, 'core/marathon.html', context)
+
+
+def green_drive(request):
+    """Nairobi Water Green Drive - Linda Kesho Leo programme page."""
+
+    context = {}
+    return render(request, 'core/green_drive.html', context)

@@ -1,0 +1,115 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block title %}Nairobi Water Green Drive — Linda Kesho Leo | Mazingira Sustainability Village{% endblock %}
+{% block body_class %}page-dark-header{% endblock %}
+
+{% block content %}
+
+<!-- HERO: loaded directly as a single graphic (Nairobi Water Green Drive / Linda Kesho Leo) -->
+<section class="gd-hero">
+    <div class="ph-block" style="background-image:url('{% static 'core/images/v1.png' %}'), linear-gradient(120deg, var(--green-darker) 0%, var(--green) 100%);">
+    
+    </div>
+</section>
+
+<!-- FLAGSHIP INTRODUCTION -->
+<section class="gd-intro">
+    <div class="container">
+        <h2 class="gd-intro-heading">
+            A Flagship Tree Growing, Aberdare Restoration &amp; Water Security
+            Initiative by Mazingira Sustainability Village (MSV)
+        </h2>
+        <p>
+            Mazingira Sustainability Village (MSV) is implementing the Green
+            Drive, a long-term, large-scale tree-growing and ecosystem
+            restoration programme designed to increase tree cover, restore
+            the Aberdare Catchment, strengthen water security, combat climate
+            change, and create sustainable livelihoods for communities.
+        </p>
+        <p>
+            The programme is anchored on a simple principle: Save Green is
+            Save Blue. The Aberdare ecosystem is a critical water tower and a
+            major source of water feeding Ndakaini Dam, which plays a vital
+            role in supplying water to Nairobi and its wider metropolitan
+            population of more than 5 million people. Restoring and
+            protecting the Aberdare Catchment is therefore an investment in
+            the environmental and economic security of millions of people.
+        </p>
+    </div>
+</section>
+
+<!-- ACHIEVEMENT CALLOUT -->
+<section class="gd-achievement">
+    <div class="container">
+        <div class="gd-achievement-box">
+            <svg class="gd-tree-icon" viewBox="0 0 100 90" fill="currentColor" stroke="none">
+                <path d="M50 8 L68 40 H32 Z"/><path d="M50 24 L74 58 H26 Z"/><path d="M50 42 L80 78 H20 Z"/><rect x="45" y="78" width="10" height="8"/>
+            </svg>
+            <p>
+                To achieve the scale of <strong>1 million</strong> trees by
+                <strong>2027</strong> and <strong>50 million</strong> trees by
+                <strong>2032</strong>, MSV will establish a dedicated
+                programme infrastructure.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- COMMUNITY PLANTING PHOTO -->
+<section class="gd-photo-section">
+    <div class="ph-block" style="background-image:url('{% static 'core/images/v4.png' %}'), linear-gradient(120deg, var(--green-light), var(--green));">
+        
+    </div>
+</section>
+
+<!-- ADOPT A FOREST BLOCK -->
+<section class="adopt">
+    <div class="container1 adopt-grid">
+        <div class="adopt-photo" style="background-image:url('{% static 'core/images/for.png' %}');"></div>
+        <div class="adopt-content">
+            <h2 class="section-heading align-left">Adopt a Forest Block – Kihinganda Forest</h2>
+            <a href="#adopt-more" class="btn btn-learn-more">
+                Learn More
+                <span class="arrow-circle dark">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- THE VISION -->
+<section class="gd-vision">
+    <div class="container">
+        <h2 class="gd-vision-heading">The Vision</h2>
+        <p>
+            The Green Drive is more than a tree-planting campaign. It is a
+            landscape restoration and water security movement.
+        </p>
+        <p>
+            By combining forest conservation, community livelihoods,
+            commercial tree growing, corporate investment, and measurable
+            impact, MSV seeks to build one of Kenya's most ambitious
+            community-led ecosystem restoration programmes.
+        </p>
+    </div>
+</section>
+
+<!-- STRATEGY CTA -->
+<section class="gd-cta">
+    <div class="container">
+        <div class="gd-cta-inner">
+            <div class="gd-cta-poster" style="background-image:url('{% static 'core/images/nwsl.png' %}'), linear-gradient(160deg, var(--green-dark), var(--green-darker));">
+                
+            </div>
+            <div class="gd-cta-text">
+                <p>Find out more about our strategy</p>
+                <a href="#strategy" class="btn btn-learn-more">Click to Read</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+{% endblock %}
