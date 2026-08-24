@@ -23,12 +23,13 @@
     padding: 64px 0 44px;
     background: var(--white);
     text-align: center;
+    justify-content: center ;
 }
 
 .impact-summary-eyebrow {
     font-family: var(--font-heading);
     font-weight: 800;
-    font-size: 30px;
+    font-size: 40px;
     color: var(--green);
     letter-spacing: 0.02em;
     line-height: 1.25;
@@ -50,7 +51,10 @@
     margin:auto 60px 20px 60px ;
     display: flex;
     flex-direction: column;
-    border-radius: 14px;
+    border-radius: 20px;
+    overflow: hidden;
+    min-height: 60vh;
+
 }
 
 .impact-row:nth-child(odd) { background: var(--green-darker); }
@@ -65,8 +69,8 @@
 }
 
 .impact-icon {
-    width: 64px;
-    height: 64px;
+    width: 84px;
+    height: 84px;
     display: flex;
     align-items: center;
     justify-content: center;

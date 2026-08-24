@@ -96,12 +96,12 @@ def impact(request):
     # ready, or point every row at the same file to reuse one icon for all.
     impact_details = [
         {
-            'icon': '',
+            'icon': 'core/images/tree1.png',
             'title': '50 Million Trees',
             'description': 'Planted and nurtured across the programme landscape.',
         },
         {
-            'icon': '',
+            'icon': 'core/images/im2.png',
             'title': 'Water Security',
             'description': (
                 'Improved protection of the Aberdare Catchment and water '
@@ -110,12 +110,12 @@ def impact(request):
             ),
         },
         {
-            'icon': '',
+            'icon': 'core/images/im3.png',
             'title': 'Climate Action',
             'description': 'Increased carbon sequestration and improved climate resilience.',
         },
         {
-            'icon': '',
+            'icon': 'core/images/im4.png',
             'title': 'Forest Restoration',
             'description': (
                 'Rehabilitation of degraded landscapes and increased '
@@ -123,7 +123,7 @@ def impact(request):
             ),
         },
         {
-            'icon': '',
+            'icon': 'core/images/im2.png',
             'title': 'Biodiversity',
             'description': 'Improved habitats and ecosystem health.',
         },
@@ -137,7 +137,7 @@ def impact(request):
             ),
         },
         {
-            'icon': '',
+            'icon': 'core/images/im2.png',
             'title': 'Environmental Education',
             'description': (
                 'Schools and young people engaged as the next generation '
@@ -145,7 +145,7 @@ def impact(request):
             ),
         },
         {
-            'icon': '',
+            'icon': 'core/images/im2.png',
             'title': 'Corporate ESG Impact',
             'description': (
                 'A structured platform through which companies can '
@@ -167,12 +167,12 @@ def marathon(request):
     """Nairobi Water Ndakaini Mazingira Half Marathon page."""
 
     info_items = [
-        {'label': 'EVENT NAME', 'value': 'Ndakaini Mazingira Half Marathon'},
-        {'label': 'EVENT DATE', 'value': '10th October (Mazingira Day)'},
-        {'label': 'VENUE', 'value': 'Ndakaini Dam, Murang\u2019a'},
-        {'label': 'INTEGRATED CAUSE', 'value': 'Sustainability'},
-        {'label': 'EXPECTED TURN OUT', 'value': 'Over 10,000 participants'},
-    ]
+    {'label': 'EVENT NAME', 'value': 'Ndakaini Mazingira Half Marathon', 'icon': 'calendar-check'},
+    {'label': 'EVENT DATE', 'value': '10th October (Mazingira Day)', 'icon': 'calendar'},
+    {'label': 'VENUE', 'value': 'Ndakaini Dam, Murang\u2019a', 'icon': 'location'},
+    {'label': 'INTEGRATED CAUSE', 'value': 'Sustainability', 'icon': 'idea'},
+    {'label': 'EXPECTED TURN OUT', 'value': 'Over 10,000 participants', 'icon': 'people'},
+]
 
     races = [
         {'name': '21KM Half Marathon', 'fee': 'KES 2,500/-', 'width': 100},
