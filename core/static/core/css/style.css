@@ -980,8 +980,16 @@ button:focus-visible {
     .newsletter-btn { display: none; }
     .nav-toggle { display: flex; }
 
-    .hero { min-height: 68vh; }
-    .hero-inner { padding-top: 90px; padding-bottom: 44px; }
+    .hero {
+    min-height: 68vh;
+    align-items: center;   /* ⬅ vertically centers hero-inner on mobile */
+    }
+
+    .hero-inner {
+        margin-top: 0;         /* ⬅ cancel desktop's 10% top margin */
+        padding-top: 0;
+        padding-bottom: 0;
+    }
     .hero-heading { font-size: 27px; }
     .hero-badge-img { width: 230px; }
 
@@ -992,7 +1000,7 @@ button:focus-visible {
     .section-heading { font-size: 24px; }
     .about, .values { padding: 56px 0; }
 
-    .about-content { padding-top: 24px; }        /* ⬅ ADDED */
+    .about-content { padding: 24px 20px 0; }        /* ⬅ ADDED */
     .about-photo-card { min-height: 280px; }
     .focus-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; max-width: 100%; margin-left: 0; margin-right: 0; }  /* ⬅ FIX: reset desktop margin-left: 50px so grid centers on mobile */
     .focus-card { padding: 12px; gap: 10px; }    /* ⬅ ADDED */
@@ -1536,7 +1544,7 @@ body.page-dark-header .site-header .nav-toggle span { background: var(--white); 
     margin-left: 10px;
     background-color: var(--green-darker);
     background-repeat: no-repeat;
-    
+
 }
 
 .gd-cta-text {
