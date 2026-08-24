@@ -1596,8 +1596,24 @@ body.page-dark-header .site-header .nav-toggle span { background: var(--white); 
     .md-heading { font-size: 21px; }
     .md-info-list { padding: 22px 22px; }
 
-    .md-cta-band { padding: 22px 24px; border-radius: 24px; min-width: 0; width: 100%; }
-    .md-cta-lockup { width: 100%; max-width: 100%; }
+    .md-cta-band {
+    flex-direction: column;   /* ⬅ stack lockup / text / button instead of left-justified rows */
+    align-items: center;      /* ⬅ centers everything horizontally */
+    text-align: center;
+    padding: 32px 24px;
+    border-radius: 24px;
+    min-width: 0;
+    width: 100%;
+    }
+    .md-cta-lockup {
+        width: 100%;
+        max-width: 320px;         /* ⬅ caps it so it doesn't touch the card edges */
+        aspect-ratio: auto;       /* ⬅ drop the 5/2 ratio that was squashing it */
+        min-height: 200px;        /* ⬅ gives the logo real room to render at size */
+        background-size: contain;
+        background-position: center;   /* ⬅ was "left center" */
+        margin: 0 auto 20px;      /* ⬅ centers the box + adds space before the text */
+    }
     .md-cta-lockup .line2 { font-size: 21px; }
     .md-sponsors-grid { min-width: 0; }
 
