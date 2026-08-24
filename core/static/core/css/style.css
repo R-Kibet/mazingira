@@ -1535,6 +1535,8 @@ body.page-dark-header .site-header .nav-toggle span { background: var(--white); 
     background-position: center;
     margin-left: 10px;
     background-color: var(--green-darker);
+    background-repeat: no-repeat;
+    
 }
 
 .gd-cta-text {
