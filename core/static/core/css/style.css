@@ -1594,6 +1594,13 @@ body.page-dark-header .site-header .nav-toggle span { background: var(--white); 
 
     .marathon-detail { padding: 48px 0; }
     .md-heading { font-size: 21px; }
+    .md-races-icon {
+        max-width: 100%;      /* ⬅ override the 160px cap inherited from tablet */
+        width: 100%;
+        min-height: 260px;    /* ⬅ smaller than desktop's 380px so it doesn't dominate the page */
+        background-size: contain;
+        background-position: center;
+    }
     .md-info-list { padding: 22px 22px; }
 
     .md-cta-band {
