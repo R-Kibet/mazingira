@@ -1577,6 +1577,7 @@ body.page-dark-header .site-header .nav-toggle span { background: var(--white); 
     .md-two-col { grid-template-columns: 1fr; }
     .md-two-col .ph-block { min-height: 200px; }
     .gd-cta-inner { grid-template-columns: 160px 1fr; }
+    .adopt-content { padding: 0 20px; }
 }
 
 @media (max-width: 720px) {
@@ -1627,8 +1628,16 @@ body.page-dark-header .site-header .nav-toggle span { background: var(--white); 
     .md-sponsors-grid { grid-template-columns: repeat(2, 1fr); }
     .md-race-row { width: 100% !important; }
 
-    .gd-hero, .gd-hero .ph-block { min-height: 46vh; }
+    .gd-hero { min-height: 46vh; }
+    .gd-hero .ph-block {
+        min-height: 46vh;
+        background-size: contain, cover;   /* ⬅ image fits fully; gradient layer still covers as backdrop */
+        background-repeat: no-repeat, no-repeat;
+        background-position: center;
+        background-color: var(--green-darker);  /* ⬅ fills any letterbox gaps with a matching color */
+    }
     .gd-intro-heading { font-size: 24px; }
+    .gd-photo-section .ph-block { min-height: 50vh; }
     .gd-cta-inner { grid-template-columns: 1fr; min-height: 0; text-align: center; }
     .gd-cta-poster { width: 100%; height: 260px; margin: 0; background-size: contain; background-position: center; }
     .gd-cta-text { align-items: center; padding: 24px 24px 30px; }
