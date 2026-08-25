@@ -1270,7 +1270,7 @@ body.page-dark-header .site-header .nav-toggle span { background: var(--white); 
     background-size: contain ;
     background-position: bottom center;
     background-repeat: no-repeat;
-    background-image
+    background-image:
         
         linear-gradient(160deg, var(--blue) 0%, var(--blue-dark) 100%);
 }
@@ -1518,7 +1518,13 @@ body.page-dark-header .site-header .nav-toggle span { background: var(--white); 
 }
 .gd-vision p strong { color: var(--ink); }
 
-.gd-cta { background: var(--green-darker); padding: 4px 0 10px; }
+.gd-cta { 
+    padding: 40px 0;              /* ⬅ a bit more room now there's a real photo to show */
+    background-color: var(--green-darker);  /* fallback while the image loads */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
 .gd-cta-inner {
     display: grid;
     grid-template-columns: 260px 1fr;
@@ -1530,7 +1536,7 @@ body.page-dark-header .site-header .nav-toggle span { background: var(--white); 
     margin: 50px auto 10px;
     border-radius: 18px;
     overflow: hidden;
-    background: rgba(255,255,255,0.03);
+    background: transparent;
 }
 .gd-cta-poster {
     display: flex;
