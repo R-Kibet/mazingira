@@ -933,7 +933,8 @@ button:focus-visible {
 
     .about-grid { grid-template-columns: 1fr; }
     .about-photo-card { min-height: 340px; }
-    .focus-grid { max-width: 100%; }
+    .about-content { margin: 0 auto; }
+    .focus-grid { max-width: 100%; margin-left: 0; margin-right: 0; }
 
     .marathon { grid-template-columns: 1fr; }
     .marathon-photo { min-height: 280px; }
