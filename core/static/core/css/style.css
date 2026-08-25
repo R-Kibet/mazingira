@@ -1645,7 +1645,16 @@ body.page-dark-header .site-header .nav-toggle span { background: var(--white); 
     .gd-intro-heading { font-size: 24px; }
     .gd-photo-section .ph-block { min-height: 50vh; }
     .gd-cta-inner { grid-template-columns: 1fr; min-height: 0; text-align: center; }
-    .gd-cta-poster { width: 100%; height: 260px; margin: 0; background-size: contain; background-position: center; }
+    .gd-cta-poster { 
+        width: 100%;
+        max-width: 280px;      /* keeps the portrait flyer from stretching too wide */
+        aspect-ratio: 3 / 4;   /* adjust to match nwsl.png's real ratio if you know it */
+        height: auto;
+        margin: 0 auto;        /* centers it, matching the screenshot */
+        background-size: contain;
+        background-position: center;
+        background-color: transparent;
+    }
     .gd-cta-text { align-items: center; padding: 24px 24px 30px; }
 
     /* ---- FIX: kill fixed desktop min-widths that force horizontal
