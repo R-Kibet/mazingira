@@ -1520,7 +1520,7 @@ body.page-dark-header .site-header .nav-toggle span { background: var(--white); 
 
 .gd-cta { 
     padding: 40px 0;              /* ⬅ a bit more room now there's a real photo to show */
-    background-color: var(--green-darker);  /* fallback while the image loads */
+      /* fallback while the image loads */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
