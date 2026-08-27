@@ -123,12 +123,12 @@ def impact(request):
             ),
         },
         {
-            'icon': 'core/images/im2.png',
+            'icon': 'core/images/im5.png',
             'title': 'Biodiversity',
             'description': 'Improved habitats and ecosystem health.',
         },
         {
-            'icon': '',
+            'icon': 'core/images/im6.png',
             'title': 'Community Livelihoods',
             'description': (
                 'Commercial fruit trees and productive tree systems '
@@ -137,7 +137,7 @@ def impact(request):
             ),
         },
         {
-            'icon': 'core/images/im2.png',
+            'icon': 'core/images/im7.png',
             'title': 'Environmental Education',
             'description': (
                 'Schools and young people engaged as the next generation '
@@ -145,7 +145,7 @@ def impact(request):
             ),
         },
         {
-            'icon': 'core/images/im2.png',
+            'icon': 'core/images/im8.png',
             'title': 'Corporate ESG Impact',
             'description': (
                 'A structured platform through which companies can '

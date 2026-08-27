@@ -505,8 +505,10 @@ button:focus-visible {
     align-items: center;
     margin-bottom: 18px;
     justify-content: center;
+    gap: 14px;
 }
 .marathon-logo-icon { height: 62px; width: auto; flex-shrink: 0; }
+.marathon-logo-icon.partner-logo { height: 90px; }
  
 .marathon-eyebrow {
     font-size: 26px;

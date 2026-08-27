@@ -12,7 +12,11 @@
     <div class="marathon-content">
         <div class="marathon-inner">
             <div class="marathon-logo">
-                <img src="{% static 'core/images/logo.png' %}" alt="Mazingira Sustainability Village" class="marathon-logo-icon">
+                <img src="{% static 'core/images/nw.png' %}" alt="Nairobi Water" class="marathon-logo-icon partner-logo">
+                
+        
+                 <img src="{% static 'core/images/logo.png' %}" alt="Mazingira Sustainability Village" class="marathon-logo-icon">
+                
             </div>
 
             <p class="marathon-eyebrow">NAIROBI WATER</p>
@@ -157,15 +161,10 @@
             </div>
             <div>
                 <div class="md-price-pill">
-                    <span>Nairobi – Ndakaini</span>
+                    <span>Plant a tree @</span>
                     <span class="fee">{{ tree_donation_price }}</span>
                 </div>
-                <p class="md-schedule-label">BUS SCHEDULE</p>
-                <div class="md-schedule-rows">
-                    {% for row in tree_donation_schedule %}
-                    <div class="md-schedule-row"><span>{{ row.stop }}</span><span>{{ row.time }}</span></div>
-                    {% endfor %}
-                </div>
+                
             </div>
            
         </div>
