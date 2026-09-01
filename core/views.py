@@ -5,6 +5,11 @@ from django.conf import settings
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
 
+from django.core.mail import EmailMultiAlternatives
+from django.template.loader import render_to_string
+from django.templatetags.static import static
+from django.utils.html import strip_tags
+
 from django.shortcuts import render
 
 
@@ -269,8 +274,9 @@ def newsletter_subscribe(request):
         )
 
     if response.status_code in (200, 201):
+        _send_newsletter_welcome_email(request, email)
         return JsonResponse({'status': 'success', 'message': 'You\u2019re subscribed \u2014 thank you!'})
-
+    
     try:
         detail = response.json()
     except ValueError:
@@ -287,3 +293,27 @@ def newsletter_subscribe(request):
         )
 
     return JsonResponse({'status': 'error', 'message': 'Something went wrong. Please try again.'}, status=response.status_code)
+
+
+def _send_newsletter_welcome_email(request, email):
+    """Send a branded confirmation email to a new newsletter subscriber."""
+    context = {
+        'email': email,
+        'site_url': request.build_absolute_uri('/'),
+        'logo_url': request.build_absolute_uri(static('core/images/logo.png')),
+    }
+    html_body = render_to_string('core/emails/newsletter_welcome.html', context)
+    text_body = strip_tags(html_body)
+
+    message = EmailMultiAlternatives(
+        subject='You\u2019re subscribed to MSV updates',
+        body=text_body,
+        from_email=settings.DEFAULT_FROM_EMAIL,
+        to=[email],
+    )
+    message.attach_alternative(html_body, 'text/html')
+    try:
+        message.send(fail_silently=True)
+    except Exception:
+        # A flaky SMTP connection should never block the on-page success message.
+        pass

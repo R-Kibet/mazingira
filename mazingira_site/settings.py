@@ -142,11 +142,25 @@ STORAGES = {
 
 MAILERS = {
     'default': {
-        'BACKEND': 'django.core.mail.backends.console.EmailBackend',
+        'BACKEND': 'django.core.mail.backends.smtp.EmailBackend',
+        'OPTIONS': {
+            'host': os.environ.get('EMAIL_HOST', ''),
+            'port': int(os.environ.get('EMAIL_PORT', 465)),
+            'username': os.environ.get('EMAIL_HOST_USER', ''),
+            'password': os.environ.get('EMAIL_HOST_PASSWORD', ''),
+            'use_ssl': os.environ.get('EMAIL_USE_SSL', 'True') == 'True',
+            'use_tls': os.environ.get('EMAIL_USE_TLS', 'False') == 'True',
+        },
     },
 }
+
+DEFAULT_FROM_EMAIL = os.environ.get(
+    'DEFAULT_FROM_EMAIL', 'Mazingira Sustainability Village <info@mazingirasustainabilityvillage.org>'
+)
 
 
 MAILCHIMP_API_KEY = os.environ.get('MAILCHIMP_API_KEY', '')
 MAILCHIMP_LIST_ID = os.environ.get('MAILCHIMP_LIST_ID', '')
 MAILCHIMP_DATA_CENTER = os.environ.get('MAILCHIMP_DATA_CENTER', '')
+
+
