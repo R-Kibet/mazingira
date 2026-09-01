@@ -313,7 +313,6 @@ def _send_newsletter_welcome_email(request, email):
     )
     message.attach_alternative(html_body, 'text/html')
     try:
-        message.send(fail_silently=True)
-    except Exception:
-        # A flaky SMTP connection should never block the on-page success message.
-        pass
+        message.send(fail_silently=False)
+    except Exception as exc:
+        print('EMAIL SEND FAILED:', repr(exc))
