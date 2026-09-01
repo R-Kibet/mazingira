@@ -30,6 +30,8 @@
 
 * { box-sizing: border-box; }
 
+html, body { overflow-x: hidden; }
+
 html { scroll-behavior: smooth; }
 
 body {
@@ -1038,14 +1040,17 @@ button:focus-visible {
     .gallery-heading { font-size: 19px; padding-bottom: 24px; }
     .gallery-strip { gap: 2px; }
 
-    .footer-grid { grid-template-columns: 1fr; gap: 30px; text-align: center; }
+    .footer-grid { grid-template-columns: 1fr !important; gap: 30px; text-align: center; }
+    .footer-newsletter-col { max-width: 100%; }
+    .newsletter-field-row { flex-direction: column; }
+    .newsletter-input { width: 100%; }
+    .newsletter-submit { width: 100%; justify-content: center; }
     .footer-logo { justify-content: center; }
     .footer-badge-link { margin: 14px auto 0; }
     .footer-bottom { flex-direction: column; text-align: center; padding-top: 32px; gap: 18px; }
     .social-icons { justify-content: center; flex-wrap: wrap; }
     .footer-nav { justify-content: center; }
-    .newsletter-field-row { justify-content: center; flex-wrap: wrap; }
-    .newsletter-input { flex: 1 1 200px; }
+   
     .site-footer .container { max-width: 100%; padding: 0 20px; }
 }
 
