@@ -6,6 +6,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{% block title %}Mazingira Sustainability Village (MSV){% endblock %}</title>
 <meta name="description" content="Mazingira Sustainability Village (MSV) - Conserving Water, Growing Forests, Empowering Communities.">
+<link rel="icon" type="image/png" href="{% static 'core/images/logo2.png' %}">
+<link rel="apple-touch-icon" href="{% static 'core/images/logo2.png' %}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -33,6 +35,7 @@
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z" stroke-linecap="round" stroke-linejoin="round"/><path d="m4 6 8 7 8-7" stroke-linecap="round" stroke-linejoin="round"/></svg>
             Newsletter
         </a>
+
 
         <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="main-nav">
             <span></span><span></span><span></span>
@@ -68,6 +71,23 @@
             <p class="footer-label">Location</p>
             <p class="footer-value">Conserving water, growing forests, empowering communities.</p>
             <p class="footer-value">Room 504, Equity Plaza, Thika, Kenya</p>
+        </div>
+
+        <div class="footer-col footer-newsletter-col" id="newsletter">
+            <p class="footer-label">Newsletter</p>
+            <p class="footer-value">Get updates on the Green Drive, the Ndakaini Marathon, and MSV's conservation work.</p>
+            <form class="newsletter-form" id="newsletter-form" data-action="{% url 'core:newsletter_subscribe' %}" novalidate>
+                {% csrf_token %}
+                <div class="newsletter-field-row">
+                    <input type="email" name="email" id="newsletter-email" class="newsletter-input" placeholder="Your email" required>
+                    <button type="submit" class="btn newsletter-submit">Subscribe</button>
+                </div>
+                <div class="newsletter-honeypot" aria-hidden="true">
+                    <label for="newsletter-website">Website</label>
+                    <input type="text" name="website" id="newsletter-website" tabindex="-1" autocomplete="off">
+                </div>
+                <p class="newsletter-message" id="newsletter-message" role="status" aria-live="polite"></p>
+            </form>
         </div>
     </div>
 

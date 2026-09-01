@@ -129,4 +129,48 @@ document.addEventListener('DOMContentLoaded', function () {
         goTo(0);
         startAuto();
     }
+
+
+    // Newsletter subscribe (Mailchimp via Django backend)
+    var newsletterForm = document.getElementById('newsletter-form');
+    if (newsletterForm) {
+        var newsletterMessage = document.getElementById('newsletter-message');
+        var newsletterSubmit = newsletterForm.querySelector('.newsletter-submit');
+
+        newsletterForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            var formData = new FormData(newsletterForm);
+            var csrfToken = newsletterForm.querySelector('[name=csrfmiddlewaretoken]').value;
+
+            newsletterMessage.textContent = '';
+            newsletterMessage.classList.remove('is-error', 'is-success');
+            newsletterSubmit.disabled = true;
+            newsletterSubmit.textContent = 'Subscribing…';
+
+            fetch(newsletterForm.dataset.action, {
+                method: 'POST',
+                headers: { 'X-CSRFToken': csrfToken },
+                body: formData,
+            })
+                .then(function (response) {
+                    return response.json().then(function (data) {
+                        return { ok: response.ok, data: data };
+                    });
+                })
+                .then(function (result) {
+                    newsletterMessage.textContent = result.data.message;
+                    newsletterMessage.classList.add(result.ok ? 'is-success' : 'is-error');
+                    if (result.ok) newsletterForm.reset();
+                })
+                .catch(function () {
+                    newsletterMessage.textContent = 'Something went wrong. Please try again.';
+                    newsletterMessage.classList.add('is-error');
+                })
+                .finally(function () {
+                    newsletterSubmit.disabled = false;
+                    newsletterSubmit.textContent = 'Subscribe';
+                });
+        });
+    }
 });

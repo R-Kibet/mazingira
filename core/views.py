@@ -1,3 +1,10 @@
+import hashlib
+
+import requests
+from django.conf import settings
+from django.http import JsonResponse
+from django.views.decorators.http import require_POST
+
 from django.shortcuts import render
 
 
@@ -223,3 +230,60 @@ def green_drive(request):
 
     context = {}
     return render(request, 'core/green_drive.html', context)
+
+
+
+@require_POST
+def newsletter_subscribe(request):
+    """Subscribe an email address to the MSV Mailchimp audience."""
+    email = request.POST.get('email', '').strip()
+
+    # Honeypot: real visitors never fill this hidden field in.
+    if request.POST.get('website'):
+        return JsonResponse({'status': 'error', 'message': 'Something went wrong.'}, status=400)
+
+    if not email or '@' not in email:
+        return JsonResponse(
+            {'status': 'error', 'message': 'Please enter a valid email address.'}, status=400
+        )
+
+    api_key = settings.MAILCHIMP_API_KEY
+    list_id = settings.MAILCHIMP_LIST_ID
+    dc = settings.MAILCHIMP_DATA_CENTER
+
+    if not (api_key and list_id and dc):
+        return JsonResponse(
+            {'status': 'error', 'message': 'Newsletter signup is not configured yet.'}, status=500
+        )
+
+    member_hash = hashlib.md5(email.lower().encode('utf-8')).hexdigest()
+    url = f'https://{dc}.api.mailchimp.com/3.0/lists/{list_id}/members/{member_hash}'
+    payload = {'email_address': email, 'status_if_new': 'subscribed', 'status': 'subscribed'}
+
+    try:
+        response = requests.put(url, auth=('anystring', api_key), json=payload, timeout=8)
+    except requests.RequestException:
+        return JsonResponse(
+            {'status': 'error', 'message': 'Could not reach Mailchimp. Please try again shortly.'},
+            status=502,
+        )
+
+    if response.status_code in (200, 201):
+        return JsonResponse({'status': 'success', 'message': 'You\u2019re subscribed \u2014 thank you!'})
+
+    try:
+        detail = response.json()
+    except ValueError:
+        detail = {}
+
+    title = detail.get('title', '')
+    if title == 'Member Exists' or 'already a list member' in detail.get('detail', ''):
+        return JsonResponse({'status': 'success', 'message': 'You\u2019re already on the list \u2014 thank you!'})
+
+    if title in ('Invalid Resource', 'Forgotten Email Not Subscribed'):
+        return JsonResponse(
+            {'status': 'error', 'message': 'That email couldn\u2019t be added. Please check it and try again.'},
+            status=400,
+        )
+
+    return JsonResponse({'status': 'error', 'message': 'Something went wrong. Please try again.'}, status=response.status_code)
