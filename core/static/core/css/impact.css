@@ -110,6 +110,7 @@
 /* ============ RESPONSIVE — TABLET (≤ 1024px) ============ */
 
 @media (max-width: 1024px) {
+    .impact-table { margin: auto 28px 20px 28px; }
     .impact-row-inner {
         grid-template-columns: 70px 200px 1fr;
         column-gap: 20px;
@@ -121,6 +122,7 @@
 /* ============ RESPONSIVE — MOBILE (≤ 720px) ============ */
 
 @media (max-width: 720px) {
+    .impact-table { margin: auto 16px 20px 16px; }
     .impact-summary { padding: 44px 0 28px; }
     .impact-summary-eyebrow { font-size: 18px; }
     .impact-summary-year { font-size: 40px; margin-left: 0; }
