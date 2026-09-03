@@ -110,7 +110,7 @@ def impact(request):
     impact_details = [
         {
             'icon': 'core/images/tree1.png',
-            'title': '50 Million Trees',
+            'title': '15 Million Trees',
             'description': 'Planted and nurtured across the programme landscape.',
         },
         {
@@ -131,8 +131,7 @@ def impact(request):
             'icon': 'core/images/im4.png',
             'title': 'Forest Restoration',
             'description': (
-                'Rehabilitation of degraded landscapes and increased '
-                'tree and forest cover.'
+                'MSV targets to rehabilitate over 1,000 hectares.'
             ),
         },
         {
@@ -190,9 +189,8 @@ def marathon(request):
     races = [
         {'name': '21KM Half Marathon', 'fee': 'KES 2,500/-', 'width': 100},
         {'name': '10KM Corporate & Fun Run', 'fee': 'KES 2,500/-', 'width': 92},
-        {'name': '8KM Community Run', 'fee': 'KES 2,500/-', 'width': 84},
-        {'name': '5KM Pace', 'fee': 'KES 1000/-', 'width': 76},
-        {'name': '2KM Legends Race', 'fee': 'KES 500/-', 'width': 68},
+        {'name': 'Community Run', 'fee': 'KES 1,000/-', 'width': 84},
+        {'name': '2KM Legends Race', 'fee': 'KES 500/-', 'width': 76},
     ]
 
     transport_schedule = [

@@ -1438,13 +1438,14 @@ body.page-dark-header .site-header .nav-toggle span { background: var(--white); 
    without wrapping. Below ~1150px there isn't enough space, so switch
    to the same stacked layout used on mobile before it has a chance to
    overflow and wrap into the tall, circular "blob" shape. */
-@media (max-width: 1150px) {
+@media (max-width: 1280px) {
     .md-cta-band {
         flex-direction: column;
         justify-content: center;
         text-align: center;
         padding: 32px 28px;
         border-radius: 32px;
+        gap: 10px
     }
     .md-cta-lockup {
         height: auto;
@@ -1698,6 +1699,8 @@ body.page-dark-header .site-header .nav-toggle span { background: var(--white); 
     border-radius: 24px;
     min-width: 0;
     width: 100%;
+    gap: 10px;
+    
     }
     .md-cta-lockup {
         height: auto;
