@@ -10,6 +10,7 @@ from django.template.loader import render_to_string
 from django.templatetags.static import static
 from django.utils.html import strip_tags
 
+from urllib.parse import urljoin
 from django.shortcuts import render
 
 
@@ -299,8 +300,8 @@ def _send_newsletter_welcome_email(request, email):
     """Send a branded confirmation email to a new newsletter subscriber."""
     context = {
         'email': email,
-        'site_url': request.build_absolute_uri('/'),
-        'logo_url': request.build_absolute_uri(static('core/images/logo.png')),
+        'site_url': settings.SITE_URL + '/',
+        'logo_url': urljoin(settings.SITE_URL, static('core/images/logo.png')),
     }
     html_body = render_to_string('core/emails/newsletter_welcome.html', context)
     text_body = strip_tags(html_body)

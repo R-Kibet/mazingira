@@ -164,3 +164,4 @@ MAILCHIMP_LIST_ID = os.environ.get('MAILCHIMP_LIST_ID', '')
 MAILCHIMP_DATA_CENTER = os.environ.get('MAILCHIMP_DATA_CENTER', '')
 
 
+SITE_URL = os.environ.get('SITE_URL', 'http://127.0.0.1:8000')
