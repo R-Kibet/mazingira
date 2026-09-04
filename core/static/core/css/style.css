@@ -1473,6 +1473,45 @@ body.page-dark-header .site-header .nav-toggle span { background: var(--white); 
         linear-gradient(160deg, var(--blue) 0%, var(--blue-dark) 100%);
 }
 
+/* --- Venue Map --- */
+.md-map-card {
+    border: 5px solid var(--green-light);
+    border-radius: 22px;
+    overflow: hidden;
+    background: var(--white);
+    min-width: 820px;
+}
+.md-map-frame {
+    display: block;
+    width: 100%;
+    height: 420px;
+    border: none;
+}
+.md-map-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 22px 30px;
+    background: linear-gradient(90deg, var(--blue-dark), var(--blue));
+}
+.md-map-venue-name {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 18px;
+    color: var(--white);
+    margin: 0 0 4px;
+}
+.md-map-venue-sub {
+    font-size: 13.5px;
+    color: rgba(255,255,255,0.75);
+    margin: 0;
+}
+.md-map-directions-btn {
+    flex-shrink: 0;
+    margin-top: 0;
+}
+
 /* --- Races and Fees --- */
 .md-races-grid {
     display: grid;
@@ -1888,6 +1927,8 @@ body.page-dark-header .site-header .nav-toggle span { background: var(--white); 
     .md-two-col .ph-block { min-height: 200px; }
     .gd-cta-inner { grid-template-columns: 160px 1fr; }
     .adopt-content { padding: 0 20px; }
+    .md-map-card { min-width: 0; }
+    .md-map-frame { height: 340px; }
 }
 
 @media (max-width: 720px) {
@@ -1988,7 +2029,8 @@ body.page-dark-header .site-header .nav-toggle span { background: var(--white); 
     .gd-intro-heading,
     .gd-intro p,
     .gd-vision-heading,
-    .gd-vision p {
+    .gd-vision p,
+    .md-map-card {
         min-width: 0;
         width: 100%;
     }
@@ -1998,6 +2040,18 @@ body.page-dark-header .site-header .nav-toggle span { background: var(--white); 
     .gd-vision-heading { font-size: 22px; }
 
     .md-race-row { width: 100% !important; }
+
+    /* Venue map: shorter frame on phones, and the footer (venue name +
+       Get Directions button) stacks instead of squeezing into one row. */
+    .md-map-card { border-width: 3px; border-radius: 16px; }
+    .md-map-frame { height: 260px; }
+    .md-map-footer {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
+        padding: 18px 20px;
+    }
+    .md-map-directions-btn { width: 100%; justify-content: center; }
 }
 
 @media (max-width: 420px) {
