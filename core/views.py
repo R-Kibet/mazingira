@@ -236,6 +236,36 @@ def green_drive(request):
     return render(request, 'core/green_drive.html', context)
 
 
+def usafi(request):
+    """Usafi programme page — clean spaces, healthy places, stronger communities."""
+ 
+    context = {
+        'page_heading': 'Usafi',
+        'page_subheading': 'Clean spaces, healthy places, stronger communities.',
+    }
+    return render(request, 'core/usafi.html', context)
+ 
+ 
+def oqota(request):
+    """Oqota programme page — recycle, repurpose."""
+ 
+    context = {
+        'page_heading': 'Oqota',
+        'page_subheading': 'Recycle. Repurpose.',
+    }
+    return render(request, 'core/oqota.html', context)
+ 
+ 
+def source_trek(request):
+    """Ndakaini Source Trek programme page — the source-to-tap walk."""
+ 
+    context = {
+        'page_heading': 'Ndakaini Source Treck',
+        'page_subheading': 'The Source to tap walk. Protect our water sources.',
+    }
+    return render(request, 'core/source_trek.html', context)
+
+
 
 @require_POST
 def newsletter_subscribe(request):

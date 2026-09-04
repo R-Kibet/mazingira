@@ -274,6 +274,82 @@ button:focus-visible {
 }
 .main-nav a:hover::after { width: 100%; }
 
+.nav-dropdown {
+    position: relative;
+}
+.nav-dropdown-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: none;
+    border: none;
+    padding: 0;
+    font-family: inherit;
+    font-size: 18px;
+    font-weight: 900;
+    color: var(--green-dark);
+    letter-spacing: 0.01em;
+    cursor: pointer;
+    position: relative;
+}
+.nav-dropdown-toggle::after {
+    content: "";
+    position: absolute;
+    left: 0; bottom: -4px;
+    width: 0; height: 2px;
+    background: var(--green);
+    transition: width 0.2s ease;
+}
+.nav-dropdown-toggle:hover::after,
+.nav-dropdown.open .nav-dropdown-toggle::after { width: 100%; }
+.nav-caret {
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+}
+.nav-dropdown.open .nav-caret { transform: rotate(180deg); }
+ 
+.nav-dropdown-menu {
+    position: absolute;
+    top: calc(100% + 18px);
+    left: 50%;
+    min-width: 260px;
+    background: var(--white);
+    border-radius: 12px;
+    box-shadow: 0 12px 30px rgba(13,34,19,0.18);
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateX(-50%) translateY(8px);
+    transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s;
+    z-index: 150;
+}
+.nav-dropdown.open .nav-dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateX(-50%) translateY(0);
+}
+.nav-dropdown-menu a {
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--green-dark);
+    white-space: nowrap;
+}
+.nav-dropdown-menu a::after { display: none; }
+.nav-dropdown-menu a:hover { background: var(--green-pale-bg); }
+ 
+/* On the transparent/dark header pages, the toggle needs the same
+   white/yellow treatment as the other nav links */
+body.page-dark-header .site-header .nav-dropdown-toggle { color: var(--white); }
+body.page-dark-header .site-header .nav-dropdown-toggle::after { background: var(--yellow); }
+
+
 .newsletter-btn { display: inline-flex; justify-content: flex-end; flex-shrink: 0; }
 
 .nav-toggle {
@@ -988,11 +1064,85 @@ button:focus-visible {
         box-shadow: 0 8px 16px rgba(0,0,0,0.08);
         transition: max-height 0.25s ease;
     }
-    .main-nav.open { max-height: 320px; }
+    .main-nav.open { max-height: 560px; }
     .main-nav a {
         padding: 14px 24px;
         border-top: 1px solid rgba(0,0,0,0.06);
     }
+
+    .nav-dropdown { width: 100%; }
+    .nav-dropdown-toggle {
+        width: 100%;
+        justify-content: space-between;
+        padding: 14px 24px;
+        border-top: 1px solid rgba(0,0,0,0.06);
+    }
+    .nav-dropdown-toggle::after { display: none; }
+    .nav-dropdown-menu {
+        position: static;
+        /* FIX: the desktop rule sets left: 50% + transform: translateX(-50%)
+           to center a floating, auto-width panel. transform was already
+           reset to none on mobile, but `left: 50%` was left in place — with
+           min-width: 260px also still inherited from desktop, the panel was
+           being sized/nudged wider than its parent and clipped by
+           .main-nav's overflow: hidden (line ~1063), which is what sliced
+           the row text off at the edge in on-device testing. */
+        left: 0;
+        transform: none;
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        box-shadow: none;
+        border-radius: 0;
+        background: var(--green-pale-bg);
+        padding: 0;
+        gap: 0;
+        min-width: 0;
+        width: 100%;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.25s ease;
+    }
+    /* FIX: raised from 240px. With labels now wrapping (white-space: normal
+       above) instead of overflowing, some rows take two lines, so the open
+       panel needs more room to show all four items without clipping the
+       last one. 320px comfortably fits 4 rows even if 2 of them wrap. */
+    .nav-dropdown.open .nav-dropdown-menu {
+        max-height: 320px;
+        /* FIX: the real root cause of the sideways-clipped text. The base
+           desktop rule .nav-dropdown-menu (line ~311) sets
+           left: 50% + transform: translateX(-50%) to center a floating,
+           auto-width panel, and .nav-dropdown.open .nav-dropdown-menu
+           (line ~330) re-asserts that same transform for the open state.
+           That second rule has higher specificity (.nav-dropdown.open
+           .nav-dropdown-menu = 3 class selectors) than the plain
+           .nav-dropdown-menu { transform: none } reset below, which only
+           has 1 class selector — media queries don't add specificity, so
+           the desktop "open" rule was winning and shifting the whole
+           panel left by half its own width (verified via computed style:
+           translateX(-196.5px) on a 393px-wide panel). Overriding it here,
+           at matching specificity, is what actually removes the shift. */
+        transform: none;
+    }
+    .nav-dropdown-menu a {
+        padding: 12px 24px 12px 36px;
+        border-radius: 0;
+        font-size: 14px;
+        /* FIX: the desktop rule (line ~342) sets white-space: nowrap so the
+           floating dropdown can size itself to its longest label. On mobile
+           the panel is position: static and locked to the header's width,
+           so nowrap made long labels ("Ndakaini Mazingira Half Marathon",
+           "Ndakaini Source Treck") overflow sideways past the visible
+           panel edge instead of wrapping — which is what made those rows
+           look blank in on-device testing. Resetting to normal lets long
+           labels wrap onto a second line within their row instead of
+           running off-screen. */
+        white-space: normal;
+        line-height: 1.35;
+    }
+
+
+
     .newsletter-btn { display: none; }
     .nav-toggle { display: flex; }
 
@@ -1087,6 +1237,9 @@ body.page-dark-header .site-header .logo-title,
 body.page-dark-header .site-header .logo-subtitle { color: var(--white); }
 body.page-dark-header .site-header .main-nav a { color: var(--white); }
 body.page-dark-header .site-header .main-nav a::after { background: var(--yellow); }
+
+body.page-dark-header .site-header .nav-dropdown-menu a { color: var(--green-dark); }
+body.page-dark-header .site-header .nav-dropdown-menu a:hover { background: var(--green-pale-bg); }
 body.page-dark-header .site-header .btn-outline-green {
     border-color: rgba(255,255,255,0.75);
     color: var(--white);
@@ -1097,13 +1250,31 @@ body.page-dark-header .site-header .btn-outline-green:hover {
 }
 body.page-dark-header .site-header .nav-toggle span { background: var(--white); }
 
+
 @media (max-width: 720px) {
     /* the dropdown panel itself stays on a white surface for legibility,
        so its own links/toggle revert to the dark, non-transparent styling */
     body.page-dark-header .site-header .main-nav { background: var(--white); }
     body.page-dark-header .site-header .main-nav a { color: var(--green-dark); }
     body.page-dark-header .site-header .main-nav a::after { background: var(--green); }
+    body.page-dark-header .site-header .nav-dropdown-toggle { color: var(--green-dark); }
     body.page-dark-header .site-header .nav-toggle.open span { background: var(--white); }
+
+    /* FIX: explicitly re-assert the submenu link color inside this same
+       media query, at equal specificity to the .main-nav a rule directly
+       above. Previously the only override for these links lived in a
+       non-mobile-scoped rule earlier in the file (~line 1201); relying on
+       source order across two separate blocks for a tie-break is fragile,
+       and on-device testing showed the submenu text rendering invisible
+       against the pale-green panel. Declaring it here, right beside the
+       other page-dark-header mobile overrides, removes the ambiguity. */
+    body.page-dark-header .site-header .nav-dropdown-menu a {
+        color: var(--green-dark);
+        background: transparent;
+    }
+    body.page-dark-header .site-header .nav-dropdown-menu a:hover {
+        background: rgba(22, 52, 31, 0.08);
+    }
 }
 
 /* =====================================================
@@ -1477,7 +1648,55 @@ body.page-dark-header .site-header .nav-toggle span { background: var(--white); 
  
 .md-final-badge { display: flex; justify-content: center; }
 
-
+.program-hero {
+    width: 100%;
+    line-height: 0; /* removes the small gap under inline images */
+    background: var(--green-darker); /* shows briefly while the image loads */
+}
+.program-hero-img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+.program-intro {
+    background: var(--white);
+    padding: 56px 24px 72px;
+    text-align: left;
+}
+.program-heading {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 60px;
+    color: var(--green-dark);
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    margin: 0 0 12px;
+}
+.program-subheading {
+    font-size: 22px;
+    color: var(--ink-soft);
+    max-width: 600px;
+    margin: 0 0 40px;
+    line-height: 1.6;
+}
+.program-icon {
+    width: 100%;
+    max-width: 520px;
+    margin: 0 auto;
+    justify-content: center;
+}
+.program-icon img {
+    width: 100%;
+    height: auto;
+    display: block;
+    justify-content: center;
+}
+ 
+@media (max-width: 720px) {
+    .program-heading { font-size: 26px; }
+    .program-subheading { font-size: 15px; }
+    .program-icon { max-width: 280px; }
+}
 /* =====================================================
    GREEN DRIVE PAGE
    ===================================================== */

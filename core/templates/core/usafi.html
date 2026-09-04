@@ -1,0 +1,26 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block title %}Usafi | Mazingira Sustainability Village{% endblock %}
+{% block body_class %}page-dark-header{% endblock %}
+
+{% block content %}
+
+<!-- HERO -->
+<section class="program-hero">
+    <img src="{% static 'core/images/usafi.png' %}" alt="Usafi programme" class="program-hero-img">
+</section>
+
+<!-- ABOUT -->
+<section class="program-intro">
+    <div class="container">
+        <h1 class="program-heading">{{ page_heading }}</h1>
+        <p class="program-subheading">{{ page_subheading }}</p>
+
+        <div class="program-icon">
+            <img src="{% static 'core/images/usafi1.png' %}" alt="">
+        </div>
+    </div>
+</section>
+
+{% endblock %}

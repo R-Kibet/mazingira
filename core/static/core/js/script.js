@@ -7,6 +7,10 @@ document.addEventListener('DOMContentLoaded', function () {
             var isOpen = nav.classList.toggle('open');
             toggle.classList.toggle('open', isOpen);
             toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+            if (!isOpen) {
+                closeProgramsDropdown();
+            }
+
         });
 
         // Close the mobile menu after tapping a link
@@ -15,9 +19,44 @@ document.addEventListener('DOMContentLoaded', function () {
                 nav.classList.remove('open');
                 toggle.classList.remove('open');
                 toggle.setAttribute('aria-expanded', 'false');
+                closeProgramsDropdown();
             });
         });
     }
+
+        // Header "Programs" dropdown
+    var programsDropdown = document.getElementById('programs-dropdown');
+    var programsToggle = document.getElementById('programs-toggle');
+ 
+    function closeProgramsDropdown() {
+        if (programsDropdown && programsToggle) {
+            programsDropdown.classList.remove('open');
+            programsToggle.setAttribute('aria-expanded', 'false');
+        }
+    }
+ 
+    if (programsDropdown && programsToggle) {
+        programsToggle.addEventListener('click', function (e) {
+            e.stopPropagation();
+            var isOpen = programsDropdown.classList.toggle('open');
+            programsToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        });
+ 
+        // Click anywhere outside the dropdown closes it
+        document.addEventListener('click', function (e) {
+            if (!programsDropdown.contains(e.target)) {
+                closeProgramsDropdown();
+            }
+        });
+ 
+        // Escape key closes it
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') {
+                closeProgramsDropdown();
+            }
+        });
+    }
+
 
     // Marathon countdown timer — targets 10 Oct 2026, 7:00 AM EAT
     var countdownEl = document.getElementById('marathon-countdown');
