@@ -18,9 +18,8 @@
 
 <header class="site-header" id="site-header">
     <div class="container header-inner">
-        <a href="{% url 'core:home' %}" class="logo">
-            <img src="{% static 'core/images/logo2.png' %}" alt="Mazingira Sustainability Village logo" class="logo-icon">
-           
+       <a href="{% url 'core:home' %}" class="logo">
+            {% block header_logo %}<img src="{% static 'core/images/logo2.png' %}" alt="Mazingira Sustainability Village logo" class="logo-icon">{% endblock %}
         </a>
 
                 <nav class="main-nav" id="main-nav">
@@ -45,10 +44,7 @@
         </nav>
 
 
-        <a href="#newsletter" class="btn btn-pill btn-outline-green newsletter-btn">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z" stroke-linecap="round" stroke-linejoin="round"/><path d="m4 6 8 7 8-7" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            Newsletter
-        </a>
+    
 
 
         <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="main-nav">
