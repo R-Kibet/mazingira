@@ -16,18 +16,18 @@
 
 <!-- EXPECTED IMPACT HEADING -->
 <section class="impact-summary">
-    <div class="container">
+    <div class="container reveal">
         <p class="impact-summary-eyebrow">
             EXPECTED<br>
-            IMPACT BY <span class="impact-summary-year">2032</span>
+            IMPACT BY <span class="impact-summary-year counter-value" data-count-to="2032" data-count-no-group>2032</span>
         </p>
     </div>
 </section>
 
 <!-- IMPACT TABLE -->
-<section class="impact-table" id="impact-breakdown">
+<section class="impact-table reveal-group" id="impact-breakdown">
     {% for item in impact_details %}
-    <div class="impact-row">
+    <div class="impact-row reveal hover-lift">
         <div class="impact-row-inner container">
             <div class="impact-icon">
                 {% if item.icon %}
@@ -36,7 +36,11 @@
                 <span class="impact-icon-placeholder" aria-hidden="true"></span>
                 {% endif %}
             </div>
+            {% if item.count_to %}
+            <p class="impact-row-title"><span class="counter-value" data-count-to="{{ item.count_to }}" data-count-suffix="{{ item.count_suffix|upper }}">0</span></p>
+            {% else %}
             <p class="impact-row-title">{{ item.title|upper }}</p>
+            {% endif %}
             <p class="impact-row-desc">{{ item.description }}</p>
         </div>
     </div>

@@ -7,13 +7,13 @@
 <section class="hero" id="home" style="background-image:url('{% static 'core/images/hero.png' %}');">
     <div class="hero-overlay"></div>
     <div class="container hero-inner">
-        <img src="{% static 'core/images/badge-save-green-blue.png' %}" alt="Save Green, Save Blue" class="hero-badge-img">
-        <h1 class="hero-heading">
+        <img src="{% static 'core/images/badge-save-green-blue.png' %}" alt="Save Green, Save Blue" class="hero-badge-img hero-in" style="--hero-delay:0.1s">
+        <h1 class="hero-heading hero-in" style="--hero-delay:0.3s">
             Upstream, MidStream & Downstream,<br>
             
         </h1>
 
-        <p class="p"> 
+        <p class="p hero-in" style="--hero-delay:0.5s"> 
             A community driven closed loop in restoration, consevation and preservation.
     </div>
 </section>
@@ -21,11 +21,11 @@
 <!-- ABOUT -->
 <section class="about" id="about">
     <div class="container1 about-grid">
-        <div class="about-photo-card" style="background-image:url('{% static 'core/images/h1.png' %}');">
+        <div class="about-photo-card reveal reveal-left" style="background-image:url('{% static 'core/images/h1.png' %}');">
            
         </div>
 
-        <div class="about-content">
+        <div class="about-content reveal reveal-right">
             <h2 class="section-heading1 ">About Mazingira<br>Sustainability Village</h2>
             <p class="about-text">
                 Mazingira Sustainability Village (MSV) is a registered community-led
@@ -36,9 +36,9 @@
                 and the Sustainable Development Goals (SDGs).
             </p>
 
-            <div class="focus-grid">
+            <div class="focus-grid reveal-group">
                 {% for area in focus_areas %}
-                <div class="focus-card">
+                <div class="focus-card reveal hover-lift">
                     <span class="focus-icon">
                         <img src="{% static area.icon %}" alt="">
                     </span>
@@ -47,7 +47,7 @@
                 {% endfor %}
             </div>
 
-            <a href="{% url 'core:marathon' %}" class="arrow-link" id="programmes">
+            <a href="{% url 'core:marathon' %}" class="arrow-link hover-icon-nudge" id="programmes">
                 Our Programmes
                 <span class="arrow-circle">
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -60,10 +60,10 @@
 <!-- CORE VALUES -->
 <section class="values">
     <div class="container1">
-        <h2 class="section-heading1 ">Our Core Values</h2>
-        <div class="values-grid">
+        <h2 class="section-heading1 reveal">Our Core Values</h2>
+        <div class="values-grid reveal-group">
             {% for value in core_values %}
-            <div class="value-card">
+            <div class="value-card reveal hover-lift">
                 <h3>{{ value.title }}</h3>
                 <p>{{ value.description }}</p>
             </div>
@@ -71,15 +71,6 @@
         </div>
     </div>
 </section>
-
-
-
-
-
-
-
-
-
 
 
 

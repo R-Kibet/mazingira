@@ -1,4 +1,126 @@
 document.addEventListener('DOMContentLoaded', function () {
+
+    // Scroll-reveal (fade-up / fade-in) — applies to any .reveal element
+    (function () {
+        var prefersReducedMotion = window.matchMedia &&
+            window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        // Auto-stagger: give direct .reveal children of a .reveal-group
+        // an incrementing data-delay so cards/rows cascade in.
+        document.querySelectorAll('.reveal-group').forEach(function (group) {
+            var children = group.querySelectorAll(':scope > .reveal');
+            children.forEach(function (child, i) {
+                if (!child.hasAttribute('data-delay')) {
+                    child.setAttribute('data-delay', i * 90);
+                }
+            });
+        });
+
+        var revealEls = document.querySelectorAll('.reveal');
+        if (!revealEls.length) return;
+
+        if (prefersReducedMotion || !('IntersectionObserver' in window)) {
+            revealEls.forEach(function (el) { el.classList.add('is-visible'); });
+            return;
+        }
+
+        var observer = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                    var el = entry.target;
+                    var delay = el.getAttribute('data-delay');
+                    if (delay) {
+                        el.style.transitionDelay = delay + 'ms';
+                    }
+                    el.classList.add('is-visible');
+                    observer.unobserve(el);
+                }
+            });
+        }, {
+            threshold: 0.15,
+            rootMargin: '0px 0px -60px 0px'
+        });
+
+        revealEls.forEach(function (el) { observer.observe(el); });
+    })();
+
+    // Counter-up — animates numbers with data-count-to when revealed
+    (function () {
+        var counters = document.querySelectorAll('[data-count-to]');
+        if (!counters.length) return;
+
+        var prefersReducedMotion = window.matchMedia &&
+            window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        function animateCounter(el) {
+            var target = parseFloat(el.getAttribute('data-count-to'));
+            var suffix = el.getAttribute('data-count-suffix') || '';
+            var noGroup = el.hasAttribute('data-count-no-group');
+            var duration = 2200;
+            var start = null;
+
+            function format(n) {
+                return noGroup ? String(n) : n.toLocaleString();
+            }
+
+            if (prefersReducedMotion || isNaN(target)) {
+                el.textContent = format(target) + suffix;
+                return;
+            }
+
+            function step(timestamp) {
+                if (!start) start = timestamp;
+                var progress = Math.min((timestamp - start) / duration, 1);
+                var eased = 1 - Math.pow(1 - progress, 3); // ease-out-cubic
+                var current = Math.floor(eased * target);
+                el.textContent = format(current) + suffix;
+                if (progress < 1) {
+                    requestAnimationFrame(step);
+                } else {
+                    el.textContent = format(target) + suffix;
+                }
+            }
+            requestAnimationFrame(step);
+        }
+
+        if (!('IntersectionObserver' in window)) {
+            counters.forEach(animateCounter);
+            return;
+        }
+
+        var counterObserver = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                    animateCounter(entry.target);
+                    counterObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.4 });
+
+        counters.forEach(function (el) { counterObserver.observe(el); });
+    })();
+
+    // Marquee — duplicates the track content once so the CSS scroll
+    // animation (translateX -50%) loops seamlessly with no visible seam.
+    document.querySelectorAll('.marquee-track').forEach(function (track) {
+        if (track.dataset.duplicated) return;
+        var clone = track.innerHTML;
+        track.insertAdjacentHTML('beforeend', clone);
+        track.dataset.duplicated = 'true';
+    });
+
+    // Back-to-top button — shows after scrolling down, scrolls to top on click
+    var backToTop = document.getElementById('back-to-top');
+    if (backToTop) {
+        var showAfter = 480;
+        window.addEventListener('scroll', function () {
+            backToTop.classList.toggle('visible', window.scrollY > showAfter);
+        });
+        backToTop.addEventListener('click', function () {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
+
     var toggle = document.getElementById('nav-toggle');
     var nav = document.getElementById('main-nav');
 
@@ -100,14 +222,18 @@ document.addEventListener('DOMContentLoaded', function () {
         var timerId = setInterval(updateCountdown, 1000);
     }
 
-    // Gallery auto-slider
-    var track = document.getElementById('gallery-track');
-    var slider = document.getElementById('gallery-slider');
-    if (track && slider) {
+    // Gallery auto-slider — supports multiple independent galleries per page
+    document.querySelectorAll('.gallery-slider').forEach(function (slider) {
+        var track = slider.querySelector('.gallery-track');
+        if (!track) return;
+
+        var section = slider.closest('.gallery');
         var slides = track.querySelectorAll('.gallery-slide');
-        var dots = document.querySelectorAll('.gallery-dot');
-        var prevBtn = document.getElementById('gallery-prev');
-        var nextBtn = document.getElementById('gallery-next');
+        var dots = section
+            ? section.querySelectorAll('.gallery-dot')
+            : slider.parentElement.querySelectorAll('.gallery-dot');
+        var prevBtn = slider.querySelector('.gallery-nav-prev');
+        var nextBtn = slider.querySelector('.gallery-nav-next');
         var current = 0;
         var autoDelay = 3500;
         var autoTimer = null;
@@ -142,7 +268,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
         function startAuto() {
             stopAuto();
-            autoTimer = setInterval(next, autoDelay);
+            if (slides.length > slidesPerView()) {
+                autoTimer = setInterval(next, autoDelay);
+            }
         }
         function stopAuto() {
             if (autoTimer) clearInterval(autoTimer);
@@ -167,7 +295,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         goTo(0);
         startAuto();
-    }
+    });
 
 
     // Newsletter subscribe (Mailchimp via Django backend)

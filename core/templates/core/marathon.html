@@ -10,7 +10,7 @@
     <div class="marathon-photo" style="background-image:url('{% static 'core/images/imp11.png' %}');"></div>
     <div class="marathon-content">
         <div class="marathon-inner">
-            <div class="marathon-logo">
+            <div class="marathon-logo hero-in" style="--hero-delay:0.05s">
                 <img src="{% static 'core/images/nw.png' %}" alt="Nairobi Water" class="marathon-logo-icon partner-logo">
                 
         
@@ -18,19 +18,19 @@
                 
             </div>
 
-            <p class="marathon-eyebrow">NAIROBI WATER</p>
-            <h2 class="marathon-heading">
+            <p class="marathon-eyebrow hero-in" style="--hero-delay:0.15s">NAIROBI WATER</p>
+            <h2 class="marathon-heading hero-in hero-in-pop" style="--hero-delay:0.25s">
                 <span class="line-white">NDAKAINI</span>
                 <span class="line-green">MAZINGIRA</span>
             </h2>
-            <p class="marathon-sub">HALF MARATHON</p>
+            <p class="marathon-sub hero-in" style="--hero-delay:0.4s">HALF MARATHON</p>
 
-            <a href="{% static 'core/images/hero1.png' %}" class="badge-pill-link">
+            <a href="{% static 'core/images/hero1.png' %}" class="badge-pill-link hero-in hover-grow" style="--hero-delay:0.5s">
                 <img src="{% static 'core/images/hero1.png' %}" alt="Save Green, Save Blue" class="badge-pill-img">
             </a>
 
-            <div class="marathon-cta-row">
-                <a href="https://apps.little.africa/events/77" class="btn btn-register">REGISTER NOW</a>
+            <div class="marathon-cta-row hero-in" style="--hero-delay:0.6s">
+                <a href="https://apps.little.africa/events/77" class="btn btn-register pulse-anim">REGISTER NOW</a>
                 <div class="countdown" id="marathon-countdown" aria-label="Time remaining until the marathon">
                     <div class="countdown-unit">
                         <span class="countdown-value" data-unit="days">00</span>
@@ -56,7 +56,7 @@
 
 <!-- ABOUT NDAKAINI MARATHON -->
 <section class="marathon-detail" id="about-marathon">
-    <div class="container">
+    <div class="container reveal">
         <h2 class="md-heading">About Nairobi Water Ndakaini Half Marathon</h2>
         <p class="md-text">
             The Nairobi Water Ndakaini Mazingira Half Marathon is our flagship
@@ -67,7 +67,7 @@
             Murang'a, Machakos, Kajiado &amp; Kiambu and environs.
         </p>
 
-        <div class="md-info-card">
+        <div class="md-info-card reveal hover-lift">
             <div class="md-info-list">
     {% for item in info_items %}
     <div class="md-info-item">
@@ -104,14 +104,14 @@
 
 <!-- VENUE MAP -->
 <section class="marathon-detail" id="venue-map">
-    <div class="container2">
+    <div class="container2 reveal ">
         <h2 class="md-heading">Where It's Held — Ndakaini Dam</h2>
         <p class="md-text">
             The race starts and finishes at Ndakaini Dam in Murang'a County,
             roughly 50km north of Nairobi. Use the map below to plan your
             route, or tap "Get Directions" to open it in Google Maps.
         </p>
-        <div class="md-map-card">
+        <div class="md-map-card reveal hover-lift">
             <iframe
                 class="md-map-frame"
                 src="https://www.google.com/maps?q=Ndakaini+Dam,+Murang%27a,+Kenya&z=13&output=embed"
@@ -138,19 +138,20 @@
     </div>
 </section>
 
+
 <!-- RACES AND FEES -->
 <section class="marathon-detail" id="races-fees">
-    <div class="container2">
+    <div class="container2 reveal">
         <h2 class="md-heading">Races and Fees</h2>
         <div class="md-races-grid">
-            <div class="md-races-icon ph-block" style="background-image:url('{% static 'core/images/m2.png' %}')">
+            <div class="md-races-icon ph-block float-anim" style="background-image:url('{% static 'core/images/m2.png' %}')">
                 
             </div>
             <div>
                 <p class="md-subheading">RACES</p>
-                <div class="md-race-rows">
+                <div class="md-race-rows reveal-group">
                     {% for race in races %}
-                    <div class="md-race-row" style="width: {{ race.width }}%; max-width: 100%;">
+                    <div class="md-race-row reveal hover-lift" style="width: {{ race.width }}%; max-width: 100%;">
                         <span>{{ race.name }}</span>
                         <span class="fee">{{ race.fee }}</span>
                     </div>
@@ -164,7 +165,7 @@
 
 <!-- TRANSPORT -->
 <section class="marathon-detail" id="transport">
-    <div class="container2">
+    <div class="container2 reveal">
         <h2 class="md-heading">Transport</h2>
         <div class="md-two-col">
             <div>
@@ -188,7 +189,7 @@
 
 <!-- TREE DONATION -->
 <section class="marathon-detail md-tree-donation" id="tree-donation">
-    <div class="container2">
+    <div class="container2 reveal">
         <h2 class="md-heading">Tree Donation</h2>
         <div class="md-two-col">
              <div class="ph-block" style="background-image:url('{% static 'core/images/tree.png' %}')">
@@ -204,19 +205,22 @@
            
         </div>
 
-        <div class="md-cta-band" id="register">
+        <div class="md-cta-band reveal reveal-zoom" id="register">
             <img src="{% static 'core/images/m11.png' %}" alt="Ndakaini Mazingira Half Marathon — Save Green, Save Blue" class="md-cta-lockup">
             <div class="md-cta-text">
                 <p class="md-cta-sub">Secure your spot today. Limited slots available for all races.</p>
-                <a href="https://apps.little.africa/events/77" class="btn btn-register">REGISTER NOW</a>
+                <a href="https://apps.little.africa/events/77" class="btn btn-register pulse-anim">REGISTER NOW</a>
             </div>
         </div>
     </div>
 </section>
 
+<!-- GALLERY -->
+{% include "core/includes/gallery.html" %}
+
 <!-- SPONSORS -->
 <section class="marathon-detail" id="sponsors">
-    <div class="container2">
+    <div class="container2 reveal">
         <h2 class="md-heading">Our Sponsors &amp; Partners</h2>
         <div class="md-sponsors-grid ph-block" style="background-image:url('{% static 'core/images/sp.png' %}');">
         </div>

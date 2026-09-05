@@ -1,7 +1,8 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="no-js">
 <head>
+<script>document.documentElement.classList.remove('no-js');</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{% block title %}Mazingira Sustainability Village (MSV){% endblock %}</title>
@@ -18,7 +19,7 @@
 
 <header class="site-header" id="site-header">
     <div class="container header-inner">
-       <a href="{% url 'core:home' %}" class="logo">
+        <a href="{% url 'core:home' %}" class="logo">
             {% block header_logo %}<img src="{% static 'core/images/logo2.png' %}" alt="Mazingira Sustainability Village logo" class="logo-icon">{% endblock %}
         </a>
 
@@ -44,7 +45,7 @@
         </nav>
 
 
-    
+        
 
 
         <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="main-nav">
@@ -65,8 +66,8 @@
                 
             
             </a>
-            <a href="{% url 'core:home' %}" class="footer-badge">
-                <img src="{% static 'core/images/hero1.png' %}" alt="Save Green, Save Blue" class="footer-badge">
+            <a href="{% url 'core:home' %}" class="footer-badge-link">
+                <img src="{% static 'core/images/hero1.png' %}" alt="Save Green, Save Blue" class="footer-badge-img">
             </a>
         </div>
 

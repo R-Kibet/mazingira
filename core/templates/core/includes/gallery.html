@@ -1,0 +1,30 @@
+{% load static %}
+{% if gallery_photos %}
+<section class="gallery reveal">
+    {% if gallery_heading %}
+    <h2 class="gallery-heading">{{ gallery_heading }}</h2>
+    {% endif %}
+    <div class="gallery-slider ">
+        <div class="gallery-track">
+            {% for photo in gallery_photos %}
+            <div class="gallery-slide hover-grow hover-lift">
+                <div class="gallery-photo" style="background-image:url('{% static photo %}');"></div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <button type="button" class="gallery-nav gallery-nav-prev" aria-label="Previous photos">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M15 6l-6 6 6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button type="button" class="gallery-nav gallery-nav-next" aria-label="Next photos">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M9 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+    </div>
+
+    <div class="gallery-dots">
+        {% for photo in gallery_photos %}
+        <button type="button" class="gallery-dot{% if forloop.first %} active{% endif %}" data-index="{{ forloop.counter0 }}" aria-label="Go to slide {{ forloop.counter }}"></button>
+        {% endfor %}
+    </div>
+</section>
+{% endif %}

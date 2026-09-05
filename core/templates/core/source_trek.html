@@ -3,7 +3,7 @@
 
 {% block title %}Ndakaini Source Treck | Mazingira Sustainability Village{% endblock %}
 {% block body_class %}page-dark-header{% endblock %}
-{% block header_logo %}<img src="{% static 'core/images/logo.png' %}" alt="Mazingira Sustainability Village logo" style="height: 85px;" class="logo-icon">{% endblock %}
+{% block header_logo %}<img src="{% static 'core/images/logo.png' %}" alt="Mazingira Sustainability Village logo" style="height: 85px;"  class="logo-icon">{% endblock %}
 
 {% block content %}
 
@@ -14,14 +14,17 @@
 
 <!-- ABOUT -->
 <section class="program-intro">
-    <div class="container">
+    <div class="container reveal">
         <h1 class="program-heading">{{ page_heading }}</h1>
         <p class="program-subheading">{{ page_subheading }}</p>
 
-        <div class="program-icon">
+        <div class="program-icon reveal reveal-zoom hover-grow" data-delay="150">
             <img src="{% static 'core/images/ps1.png' %}" alt="">
         </div>
     </div>
 </section>
+
+<!-- GALLERY -->
+
 
 {% endblock %}

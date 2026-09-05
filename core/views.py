@@ -111,6 +111,8 @@ def impact(request):
         {
             'icon': 'core/images/tree1.png',
             'title': '15 Million Trees',
+            'count_to': 15,
+            'count_suffix': ' Million Trees',
             'description': 'Planted and nurtured across the programme landscape.',
         },
         {
@@ -194,15 +196,15 @@ def marathon(request):
     ]
 
     transport_schedule = [
-        {'stop': 'Kencom', 'time': '5:30 AM'},
-        {'stop': 'TRM', 'time': '6:00 AM'},
-        {'stop': 'Kenyatta University', 'time': '6:30 AM'},
+        {'stop': 'Kencom', 'time': '6:00 AM'},
+        {'stop': 'TRM', 'time': '6:30 AM'},
+        {'stop': 'Kenyatta University', 'time': '5:00 AM'},
     ]
 
     tree_donation_schedule = [
-        {'stop': 'Kencom', 'time': '8:00 AM'},
-        {'stop': 'TRM', 'time': '8:30 AM'},
-        {'stop': 'Kenyatta University', 'time': '9:00 AM'},
+        {'stop': 'Kencom', 'time': '4:00 AM'},
+        {'stop': 'TRM', 'time': '4:30 AM'},
+        {'stop': 'Kenyatta University', 'time': '5:00 AM'},
     ]
 
     sponsors = [
@@ -217,6 +219,17 @@ def marathon(request):
         'Subaru Kenya',
     ]
 
+    # Marathon-specific gallery photos. Swap these filenames for the actual
+    # race-day/marathon images once uploaded to core/images/.
+    gallery_photos = [
+        'core/images/r1.jpeg',
+        'core/images/r2.jpeg',
+        'core/images/r6.jpeg',
+        'core/images/r4.jpeg',
+        'core/images/r5.jpeg',
+        'core/images/r3.jpeg',
+    ]
+
     context = {
         'info_items': info_items,
         'races': races,
@@ -225,6 +238,8 @@ def marathon(request):
         'tree_donation_price': 'KES 500/-',
         'tree_donation_schedule': tree_donation_schedule,
         'sponsors': sponsors,
+        'gallery_photos': gallery_photos,
+        'gallery_heading': 'Moments From the Ndakaini Marathon',
     }
     return render(request, 'core/marathon.html', context)
 
@@ -238,30 +253,69 @@ def green_drive(request):
 
 def usafi(request):
     """Usafi programme page — clean spaces, healthy places, stronger communities."""
- 
+
+    # Usafi-specific gallery photos — swap filenames for the actual Usafi
+    # clean-up/community photos once uploaded to core/images/.
+    gallery_photos = [
+        'core/images/usafi-g1.jpg',
+        'core/images/usafi-g2.jpg',
+        'core/images/usafi-g3.jpg',
+        'core/images/usafi-g4.jpg',
+        'core/images/usafi-g5.jpg',
+        'core/images/usafi-g6.jpg',
+    ]
+
     context = {
         'page_heading': 'Usafi',
         'page_subheading': 'Clean spaces, healthy places, stronger communities.',
+        'gallery_photos': gallery_photos,
+        'gallery_heading': 'Usafi in Action',
     }
     return render(request, 'core/usafi.html', context)
  
  
 def oqota(request):
     """Oqota programme page — recycle, repurpose."""
- 
+
+    # Oqota-specific gallery photos — swap filenames for the actual
+    # recycling/repurposing programme photos once uploaded to core/images/.
+    gallery_photos = [
+        'core/images/oqota-g1.jpg',
+        'core/images/oqota-g2.jpg',
+        'core/images/oqota-g3.jpg',
+        'core/images/oqota-g4.jpg',
+        'core/images/oqota-g5.jpg',
+        'core/images/oqota-g6.jpg',
+    ]
+
     context = {
         'page_heading': 'Oqota',
         'page_subheading': 'Recycle. Repurpose.',
+        'gallery_photos': gallery_photos,
+        'gallery_heading': 'Oqota in Action',
     }
     return render(request, 'core/oqota.html', context)
  
  
 def source_trek(request):
     """Ndakaini Source Trek programme page — the source-to-tap walk."""
- 
+
+    # Source Trek-specific gallery photos — swap filenames for the actual
+    # source-to-tap walk photos once uploaded to core/images/.
+    gallery_photos = [
+        'core/images/sourcetrek-g1.jpg',
+        'core/images/sourcetrek-g2.jpg',
+        'core/images/sourcetrek-g3.jpg',
+        'core/images/sourcetrek-g4.jpg',
+        'core/images/sourcetrek-g5.jpg',
+        'core/images/sourcetrek-g6.jpg',
+    ]
+
     context = {
         'page_heading': 'Ndakaini Source Treck',
         'page_subheading': 'The Source to tap walk. Protect our water sources.',
+        'gallery_photos': gallery_photos,
+        'gallery_heading': 'The Source Trek Journey',
     }
     return render(request, 'core/source_trek.html', context)
 

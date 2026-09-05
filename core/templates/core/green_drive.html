@@ -14,7 +14,7 @@
 
 <!-- FLAGSHIP INTRODUCTION -->
 <section class="gd-intro">
-    <div class="container">
+    <div class="container reveal">
         <h2 class="gd-intro-heading">
             A Flagship Tree Growing, Aberdare Restoration &amp; Water Security
             Initiative by Mazingira Sustainability Village (MSV)
@@ -41,14 +41,14 @@
 <!-- ACHIEVEMENT CALLOUT -->
 <section class="gd-achievement">
     <div class="container">
-        <div class="gd-achievement-box">
+        <div class="gd-achievement-box reveal reveal-zoom hover-lift">
             <svg class="gd-tree-icon" viewBox="0 0 100 90" fill="currentColor" stroke="none">
                 <path d="M50 8 L68 40 H32 Z"/><path d="M50 24 L74 58 H26 Z"/><path d="M50 42 L80 78 H20 Z"/><rect x="45" y="78" width="10" height="8"/>
             </svg>
             <p>
-                To achieve the scale of <strong>1 million</strong> trees by
-                <strong>2027</strong> and <strong>50 million</strong> trees by
-                <strong>2032</strong>, MSV will establish a dedicated
+                To achieve the scale of <strong><span class="counter-value" data-count-to="1" data-count-suffix=" million" data-count-no-group>0 million</span></strong> trees by
+                <strong><span class="counter-value" data-count-to="2027" data-count-no-group>2027</span></strong> and <strong><span class="counter-value" data-count-to="15" data-count-suffix=" million" data-count-no-group>0 million</span></strong> trees by
+                <strong><span class="counter-value" data-count-to="2032" data-count-no-group>2032</span></strong>, MSV will establish a dedicated
                 programme infrastructure.
             </p>
         </div>
@@ -56,7 +56,7 @@
 </section>
 
 <!-- COMMUNITY PLANTING PHOTO -->
-<section class="gd-photo-section">
+<section class="gd-photo-section reveal reveal-fade">
     <div class="ph-block" style="background-image:url('{% static 'core/images/v4.png' %}'), linear-gradient(120deg, var(--green-light), var(--green));">
         
     </div>
@@ -65,10 +65,10 @@
 <!-- ADOPT A FOREST BLOCK -->
 <section class="adopt">
     <div class="container1 adopt-grid">
-        <div class="adopt-photo" style="background-image:url('{% static 'core/images/for.png' %}');"></div>
-        <div class="adopt-content">
+        <div class="adopt-photo reveal reveal-left" style="background-image:url('{% static 'core/images/for.png' %}');"></div>
+        <div class="adopt-content reveal reveal-right">
             <h2 class="section-heading align-left">Adopt a Forest Block – Kihinganda Forest</h2>
-            <a href="#adopt-more" class="btn btn-learn-more">
+            <a href="#adopt-more" class="btn btn-learn-more hover-icon-nudge">
                 Learn More
                 <span class="arrow-circle dark">
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -80,7 +80,7 @@
 
 <!-- THE VISION -->
 <section class="gd-vision">
-    <div class="container">
+    <div class="container reveal">
         <h2 class="gd-vision-heading">The Vision</h2>
         <p>
             The Green Drive is more than a tree-planting campaign. It is a
@@ -98,17 +98,16 @@
 <!-- STRATEGY CTA -->
 <section class="gd-cta" style="background-image: url('{% static 'core/images/bgn.png' %}');">
     <div class="container">
-        <div class="gd-cta-inner">
+        <div class="gd-cta-inner reveal reveal-zoom">
             <div class="gd-cta-poster" style="background-image:url('{% static 'core/images/nwsl.png' %}');">
                 
             </div>
             <div class="gd-cta-text">
                 <p>Find out more about our strategy</p>
-                <a href="#strategy" class="btn btn-learn-more">Click to Read</a>
+                <a href="#strategy" class="btn btn-learn-more hover-icon-nudge">Click to Read</a>
             </div>
         </div>
     </div>
 </section>
-
 
 {% endblock %}

@@ -81,6 +81,148 @@ h1, h2, h3 {
     * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
 }
 
+/* ============================================
+   SCROLL REVEAL — fade-up / fade-in on scroll
+   Add class "reveal" (fade-up, default) plus an
+   optional direction/style modifier below. JS
+   (script.js) adds "is-visible" via
+   IntersectionObserver when it enters view.
+   Wrap a set of cards in "reveal-group" to have
+   their direct .reveal children auto-stagger.
+   ============================================ */
+.reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 1.1s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 1.1s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+}
+.reveal.reveal-fade   { transform: none; }
+.reveal.reveal-left   { transform: translateX(-40px); }
+.reveal.reveal-right  { transform: translateX(40px); }
+.reveal.reveal-zoom   { transform: scale(0.92); }
+.reveal.reveal-down   { transform: translateY(-28px); }
+.reveal.reveal-flip   { transform: perspective(800px) rotateX(12deg) translateY(18px); }
+.reveal.reveal-blur   { transform: none; filter: blur(6px); }
+.reveal.is-visible {
+    opacity: 1;
+    transform: none;
+    filter: none;
+}
+
+/* If JS never runs (disabled, blocked, error) content must still show */
+.no-js .reveal { opacity: 1; transform: none; filter: none; }
+
+/* ============================================
+   HERO ENTRANCE — plays once on page load, not
+   scroll-triggered (content is above the fold).
+   Elements with "hero-in" animate in with a
+   staggered delay driven by --hero-delay.
+   ============================================ */
+@keyframes heroRise {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes heroPop {
+    0%   { opacity: 0; transform: scale(0.85); }
+    70%  { opacity: 1; transform: scale(1.03); }
+    100% { opacity: 1; transform: scale(1); }
+}
+.hero-in {
+    opacity: 0;
+    animation: heroRise 1.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation-delay: var(--hero-delay, 0s);
+}
+.hero-in.hero-in-pop {
+    animation-name: heroPop;
+}
+@media (prefers-reduced-motion: reduce) {
+    .hero-in { animation: none; opacity: 1; transform: none; }
+}
+
+/* ============================================
+   AMBIENT / CONTINUOUS MOTION — used sparingly
+   on a handful of decorative elements only.
+   ============================================ */
+@keyframes floatY {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-10px); }
+}
+.float-anim {
+    animation: floatY 4.5s ease-in-out infinite;
+}
+@keyframes pulseSoft {
+    0%, 100% { transform: scale(1); }
+    50%      { transform: scale(1.05); }
+}
+.pulse-anim {
+    animation: pulseSoft 3.2s ease-in-out infinite;
+}
+.pulse-anim:hover {
+    animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+    .float-anim, .pulse-anim { animation: none; }
+}
+
+/* ============================================
+   HOVER MICRO-INTERACTIONS — CSS-only, applied
+   to cards, buttons, icons across the site.
+   ============================================ */
+.hover-lift {
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+}
+.hover-lift:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 32px rgba(13,34,19,0.16);
+}
+.hover-grow {
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.hover-grow:hover { transform: scale(1.05); }
+.hover-icon-nudge svg,
+.hover-icon-nudge img {
+    transition: transform 0.25s ease;
+}
+.hover-icon-nudge:hover svg,
+.hover-icon-nudge:hover img {
+    transform: translateX(4px);
+}
+
+/* ============================================
+   COUNTER — number counts up when revealed.
+   JS drives the number via data-count-to; CSS
+   just makes sure it doesn't jump/flash.
+   ============================================ */
+.counter-value {
+    font-variant-numeric: tabular-nums;
+}
+
+/* ============================================
+   MARQUEE — continuous horizontal auto-scroll,
+   used for the sponsors strip. Pauses on hover
+   and on reduced-motion.
+   ============================================ */
+.marquee {
+    overflow: hidden;
+    position: relative;
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+.marquee-track {
+    display: flex;
+    width: max-content;
+    animation: marqueeScroll 28s linear infinite;
+}
+.marquee:hover .marquee-track { animation-play-state: paused; }
+@keyframes marqueeScroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+}
+@media (prefers-reduced-motion: reduce) {
+    .marquee-track { animation: none; }
+}
+
 /* Visible keyboard focus */
 a:focus-visible,
 button:focus-visible {
@@ -936,10 +1078,9 @@ body.page-dark-header .site-header .nav-dropdown-toggle::after { background: var
 
 .footer-grid {
     display: grid;
-    grid-template-columns: 1.2fr 1fr 1.4fr;
+    grid-template-columns: 1.2fr  1fr 1.4fr;
     gap: 48px;
     padding-bottom: 36px;
-    
 }
 .footer-logo {
     display: flex;
@@ -1081,14 +1222,6 @@ body.page-dark-header .site-header .nav-dropdown-toggle::after { background: var
     .nav-dropdown-toggle::after { display: none; }
     .nav-dropdown-menu {
         position: static;
-        /* FIX: the desktop rule sets left: 50% + transform: translateX(-50%)
-           to center a floating, auto-width panel. transform was already
-           reset to none on mobile, but `left: 50%` was left in place — with
-           min-width: 260px also still inherited from desktop, the panel was
-           being sized/nudged wider than its parent and clipped by
-           .main-nav's overflow: hidden (line ~1063), which is what sliced
-           the row text off at the edge in on-device testing. */
-        left: 0;
         transform: none;
         opacity: 1;
         visibility: visible;
@@ -1099,47 +1232,15 @@ body.page-dark-header .site-header .nav-dropdown-toggle::after { background: var
         padding: 0;
         gap: 0;
         min-width: 0;
-        width: 100%;
         max-height: 0;
         overflow: hidden;
         transition: max-height 0.25s ease;
     }
-    /* FIX: raised from 240px. With labels now wrapping (white-space: normal
-       above) instead of overflowing, some rows take two lines, so the open
-       panel needs more room to show all four items without clipping the
-       last one. 320px comfortably fits 4 rows even if 2 of them wrap. */
-    .nav-dropdown.open .nav-dropdown-menu {
-        max-height: 320px;
-        /* FIX: the real root cause of the sideways-clipped text. The base
-           desktop rule .nav-dropdown-menu (line ~311) sets
-           left: 50% + transform: translateX(-50%) to center a floating,
-           auto-width panel, and .nav-dropdown.open .nav-dropdown-menu
-           (line ~330) re-asserts that same transform for the open state.
-           That second rule has higher specificity (.nav-dropdown.open
-           .nav-dropdown-menu = 3 class selectors) than the plain
-           .nav-dropdown-menu { transform: none } reset below, which only
-           has 1 class selector — media queries don't add specificity, so
-           the desktop "open" rule was winning and shifting the whole
-           panel left by half its own width (verified via computed style:
-           translateX(-196.5px) on a 393px-wide panel). Overriding it here,
-           at matching specificity, is what actually removes the shift. */
-        transform: none;
-    }
+    .nav-dropdown.open .nav-dropdown-menu { max-height: 240px; }
     .nav-dropdown-menu a {
         padding: 12px 24px 12px 36px;
         border-radius: 0;
         font-size: 14px;
-        /* FIX: the desktop rule (line ~342) sets white-space: nowrap so the
-           floating dropdown can size itself to its longest label. On mobile
-           the panel is position: static and locked to the header's width,
-           so nowrap made long labels ("Ndakaini Mazingira Half Marathon",
-           "Ndakaini Source Treck") overflow sideways past the visible
-           panel edge instead of wrapping — which is what made those rows
-           look blank in on-device testing. Resetting to normal lets long
-           labels wrap onto a second line within their row instead of
-           running off-screen. */
-        white-space: normal;
-        line-height: 1.35;
     }
 
 
@@ -1260,22 +1361,6 @@ body.page-dark-header .site-header .nav-toggle span { background: var(--white); 
     body.page-dark-header .site-header .main-nav a::after { background: var(--green); }
     body.page-dark-header .site-header .nav-dropdown-toggle { color: var(--green-dark); }
     body.page-dark-header .site-header .nav-toggle.open span { background: var(--white); }
-
-    /* FIX: explicitly re-assert the submenu link color inside this same
-       media query, at equal specificity to the .main-nav a rule directly
-       above. Previously the only override for these links lived in a
-       non-mobile-scoped rule earlier in the file (~line 1201); relying on
-       source order across two separate blocks for a tie-break is fragile,
-       and on-device testing showed the submenu text rendering invisible
-       against the pale-green panel. Declaring it here, right beside the
-       other page-dark-header mobile overrides, removes the ambiguity. */
-    body.page-dark-header .site-header .nav-dropdown-menu a {
-        color: var(--green-dark);
-        background: transparent;
-    }
-    body.page-dark-header .site-header .nav-dropdown-menu a:hover {
-        background: rgba(22, 52, 31, 0.08);
-    }
 }
 
 /* =====================================================
@@ -1474,6 +1559,7 @@ body.page-dark-header .site-header .nav-toggle span { background: var(--white); 
         linear-gradient(160deg, var(--blue) 0%, var(--blue-dark) 100%);
 }
 
+ 
 /* --- Venue Map --- */
 .md-map-card {
     border: 5px solid var(--green-light);
@@ -1512,6 +1598,7 @@ body.page-dark-header .site-header .nav-toggle span { background: var(--white); 
     flex-shrink: 0;
     margin-top: 0;
 }
+
 
 /* --- Races and Fees --- */
 .md-races-grid {
@@ -1930,6 +2017,7 @@ body.page-dark-header .site-header .nav-toggle span { background: var(--white); 
     .adopt-content { padding: 0 20px; }
     .md-map-card { min-width: 0; }
     .md-map-frame { height: 340px; }
+
 }
 
 @media (max-width: 720px) {
@@ -2035,6 +2123,7 @@ body.page-dark-header .site-header .nav-toggle span { background: var(--white); 
         min-width: 0;
         width: 100%;
     }
+
     .md-text { font-size: 16px; }
     .gd-intro p,
     .gd-vision p { font-size: 16px; }
@@ -2042,7 +2131,7 @@ body.page-dark-header .site-header .nav-toggle span { background: var(--white); 
 
     .md-race-row { width: 100% !important; }
 
-    /* Venue map: shorter frame on phones, and the footer (venue name +
+        /* Venue map: shorter frame on phones, and the footer (venue name +
        Get Directions button) stacks instead of squeezing into one row. */
     .md-map-card { border-width: 3px; border-radius: 16px; }
     .md-map-frame { height: 260px; }
@@ -2053,6 +2142,7 @@ body.page-dark-header .site-header .nav-toggle span { background: var(--white); 
         padding: 18px 20px;
     }
     .md-map-directions-btn { width: 100%; justify-content: center; }
+
 }
 
 @media (max-width: 420px) {
