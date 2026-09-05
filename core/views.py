@@ -196,9 +196,9 @@ def marathon(request):
     ]
 
     transport_schedule = [
-        {'stop': 'Kencom', 'time': '6:00 AM'},
-        {'stop': 'TRM', 'time': '6:30 AM'},
-        {'stop': 'Kenyatta University', 'time': '5:00 AM'},
+        {'stop': 'Kencom', 'time': '5:00 AM'},
+        {'stop': 'TRM', 'time': '6:00 AM'},
+        {'stop': 'Kenyatta University', 'time': '6:30 AM'},
     ]
 
     tree_donation_schedule = [
