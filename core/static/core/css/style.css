@@ -1219,9 +1219,16 @@ body.page-dark-header .site-header .nav-dropdown-toggle::after { background: var
         padding: 14px 24px;
         border-top: 1px solid rgba(0,0,0,0.06);
     }
-    .nav-dropdown-toggle::after { display: none; }
-    .nav-dropdown-menu {
+        .nav-dropdown-menu {
         position: static;
+        /* FIX: the desktop rule sets left: 50% + transform: translateX(-50%)
+           to center a floating, auto-width panel. transform was already
+           reset to none on mobile, but `left: 50%` was left in place — with
+           min-width: 260px also still inherited from desktop, the panel was
+           being sized/nudged wider than its parent and clipped by
+           .main-nav's overflow: hidden (line ~1063), which is what sliced
+           the row text off at the edge in on-device testing. */
+        left: 0;
         transform: none;
         opacity: 1;
         visibility: visible;
@@ -1232,16 +1239,49 @@ body.page-dark-header .site-header .nav-dropdown-toggle::after { background: var
         padding: 0;
         gap: 0;
         min-width: 0;
+        width: 100%;
         max-height: 0;
         overflow: hidden;
         transition: max-height 0.25s ease;
     }
-    .nav-dropdown.open .nav-dropdown-menu { max-height: 240px; }
+    /* FIX: raised from 240px. With labels now wrapping (white-space: normal
+       above) instead of overflowing, some rows take two lines, so the open
+       panel needs more room to show all four items without clipping the
+       last one. 320px comfortably fits 4 rows even if 2 of them wrap. */
+    .nav-dropdown.open .nav-dropdown-menu {
+        max-height: 320px;
+        /* FIX: the real root cause of the sideways-clipped text. The base
+           desktop rule .nav-dropdown-menu (line ~311) sets
+           left: 50% + transform: translateX(-50%) to center a floating,
+           auto-width panel, and .nav-dropdown.open .nav-dropdown-menu
+           (line ~330) re-asserts that same transform for the open state.
+           That second rule has higher specificity (.nav-dropdown.open
+           .nav-dropdown-menu = 3 class selectors) than the plain
+           .nav-dropdown-menu { transform: none } reset below, which only
+           has 1 class selector — media queries don't add specificity, so
+           the desktop "open" rule was winning and shifting the whole
+           panel left by half its own width (verified via computed style:
+           translateX(-196.5px) on a 393px-wide panel). Overriding it here,
+           at matching specificity, is what actually removes the shift. */
+        transform: none;
+    }
     .nav-dropdown-menu a {
         padding: 12px 24px 12px 36px;
         border-radius: 0;
         font-size: 14px;
+        /* FIX: the desktop rule (line ~342) sets white-space: nowrap so the
+           floating dropdown can size itself to its longest label. On mobile
+           the panel is position: static and locked to the header's width,
+           so nowrap made long labels ("Ndakaini Mazingira Half Marathon",
+           "Ndakaini Source Treck") overflow sideways past the visible
+           panel edge instead of wrapping — which is what made those rows
+           look blank in on-device testing. Resetting to normal lets long
+           labels wrap onto a second line within their row instead of
+           running off-screen. */
+        white-space: normal;
+        line-height: 1.35;
     }
+
 
 
 
